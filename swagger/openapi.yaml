@@ -29,6 +29,19 @@ paths:
       description: 記事の一覧を作成日時の降順で返します。
       operationId: searchEvens
       parameters:
+        - name: fields
+          in: query
+          description: 検索結果で取得するフィールドをカンマ区切りで指定
+          required: false
+          schema:
+            type: string
+        - name: query
+          in: query
+          description: 検索クエリ
+          required: false
+          schema:
+            type: integer
+            format: int64
         - name: page
           in: query
           description: ページ番号 (1から100まで)
@@ -39,13 +52,6 @@ paths:
         - name: per_page
           in: query
           description: 1ページあたりに含まれる要素数 (1から100まで)
-          required: false
-          schema:
-            type: integer
-            format: int64
-        - name: query
-          in: query
-          description: 検索クエリ
           required: false
           schema:
             type: integer
@@ -70,29 +76,10 @@ paths:
       description: ""
       operationId: addEvent
       requestBody:
-        $ref: "#/components/requestBodies/Event"
+        $ref: "#/components/requestBodies/EventArray"
       responses:
         '201':
           description: CREATED
-      security:
-        - event_auth:
-            - write:events
-            - read:events
-    put:
-      tags:
-        - event
-      summary: 作成済みのイベントを更新する
-      description: ""
-      operationId: updateEvent
-      requestBody:
-        $ref: "#/components/requestBodies/Event"
-      responses:
-        "400":
-          description: Invalid ID supplied
-        "404":
-          description: Event not found
-        "405":
-          description: Validation exception
       security:
         - event_auth:
             - write:events
@@ -112,6 +99,12 @@ paths:
           schema:
             type: integer
             format: int64
+        - name: fields
+          in: query
+          description: 検索結果で取得するフィールドをカンマ区切りで指定
+          required: false
+          schema:
+            type: string
       responses:
         "200":
           description: successful operation
@@ -125,12 +118,12 @@ paths:
           description: Event not found
       security:
         - api_key: []
-    post:
+    patch:
       tags:
         - event
       summary: 特定のイベントを更新する
       description: ""
-      operationId: updateEventWithForm
+      operationId: updateEvent
       parameters:
         - name: eventId
           in: path
@@ -154,6 +147,25 @@ paths:
                 capacity:
                   description: Updated capacity of the event
                   type: string
+                image_url:
+                  type: string
+                  description: イベントの画像
+                qr_code_url:
+                  type: string
+                  description: 投げ銭用のQRコード
+                hold_start_date:
+                  type: string
+                  format: date-time
+                hold_end_date:
+                  type: string
+                  format: date-time
+                recruit_start_date:
+                  type: string
+                  format: date-time
+                recruit_end_date:
+                  type: string
+                  format: date-time
+                  
       responses:
         "405":
           description: Invalid input
@@ -166,7 +178,7 @@ paths:
         - event
       summary: 特定のイベントを削除する
       description: ""
-      operationId: deletePet
+      operationId: deleteEvent
       parameters:
         - name: api_key
           in: header
@@ -189,6 +201,27 @@ paths:
         - event_auth:
             - write:events
             - read:events
+            
+  /event/{eventId}/entry:
+    post:
+      tags:
+        - event
+      summary: イベントにを追加する
+      description: entry_eventsの関連テーブルにレコードを追加する
+      operationId: entryEvent
+      parameters:
+        - name: eventId
+          in: path
+          description: ID of event that needs added
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        $ref: "#/components/requestBodies/Entry"
+      responses:
+        '201':
+          description: CREATED
   /category:
     post:
       tags:
@@ -251,10 +284,10 @@ paths:
       responses:
         default:
           description: successful operation
-  /group{groupId}:
+  /group/{groupId}:
     get:
       tags:
-      - "group"
+      - group
       summary: "Find pet by ID"
       description: "Returns a single pet"
       operationId: "getGroupById"
@@ -279,6 +312,68 @@ paths:
           description: "Pet not found"
       security:
       - api_key: []
+  /group/{groupId}/member:
+    post:
+      tags:
+        - group
+      summary: メンバーを追加する
+      description: memberテーブルにレコードを追加する
+      operationId: joinGroup
+      parameters:
+        - name: groupId
+          in: path
+          description: ID of event that needs added
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                entries:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/Group"
+            encoding:
+              color:
+                style: form
+                explode: false
+      responses:
+        '201':
+          description: CREATED
+  /group/{groupId}/member/{name}:
+    delete:
+      tags:
+        - group
+      summary: メンバーを削除する
+      description: ""
+      operationId: deleteMember
+      parameters:
+        - name: groupId
+          in: path
+          description: Pet id to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: name
+          in: path
+          description: ユーザ名
+          required: true
+          schema:
+            type: string
+      responses:
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Pet not found
+      security:
+        - event_auth:
+            - write:events
+            - read:events
   /user:
     post:
       tags:
@@ -296,84 +391,8 @@ paths:
       responses:
         '201':
           description: CREATED
-  /user/createWithArray:
-    post:
-      tags:
-        - user
-      summary: Creates list of users with given input array
-      description: ""
-      operationId: createUsersWithArrayInput
-      requestBody:
-        $ref: "#/components/requestBodies/UserArray"
-      responses:
-        default:
-          description: successful operation
-  /user/createWithList:
-    post:
-      tags:
-        - user
-      summary: Creates list of users with given input array
-      description: ""
-      operationId: createUsersWithListInput
-      requestBody:
-        $ref: "#/components/requestBodies/UserArray"
-      responses:
-        default:
-          description: successful operation
-  /user/login:
-    get:
-      tags:
-        - user
-      summary: Logs user into the system
-      description: ""
-      operationId: loginUser
-      parameters:
-        - name: username
-          in: query
-          description: The user name for login
-          required: true
-          schema:
-            type: string
-        - name: password
-          in: query
-          description: The password for login in clear text
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          description: successful operation
-          headers:
-            X-Rate-Limit:
-              description: calls per hour allowed by the user
-              schema:
-                type: integer
-                format: int32
-            X-Expires-After:
-              description: date in UTC when token expires
-              schema:
-                type: string
-                format: date-time
-          content:
-            application/xml:
-              schema:
-                type: string
-            application/json:
-              schema:
-                type: string
-        "400":
-          description: Invalid username/password supplied
-  /user/logout:
-    get:
-      tags:
-        - user
-      summary: Logs out current logged in user session
-      description: ""
-      operationId: logoutUser
-      responses:
-        default:
-          description: successful operation
-  "/user/{username}":
+
+  "/user/{name}":
     get:
       tags:
         - user
@@ -381,7 +400,7 @@ paths:
       description: ""
       operationId: getUserByName
       parameters:
-        - name: username
+        - name: name
           in: path
           description: "The name that needs to be fetched. Use user1 for testing. "
           required: true
@@ -408,7 +427,7 @@ paths:
       description: This can only be done by the logged in user.
       operationId: updateUser
       parameters:
-        - name: username
+        - name: name
           in: path
           description: name that need to be updated
           required: true
@@ -433,7 +452,7 @@ paths:
       description: This can only be done by the logged in user.
       operationId: deleteUser
       parameters:
-        - name: username
+        - name: name
           in: path
           description: The name that needs to be deleted
           required: true
@@ -444,18 +463,41 @@ paths:
           description: Invalid username supplied
         "404":
           description: User not found
+  /user/{name}/new_events:
+    get:
+      tags:
+        - user
+      summary: Get new events for user by name
+      description: ""
+      operationId: getNewEvents
+      parameters:
+        - name: name
+          in: path
+          description: name of user
+          required: true
+          schema:
+            type: string
+            format: int64
+      responses:
+        201:
+          description: successful operation
 components:
   requestBodies:
-    UserArray:
+    Entry:
       content:
-        application/json:
+        application/x-www-form-urlencoded:
           schema:
-            type: array
-            items:
-              $ref: "#/components/schemas/User"
-      description: List of user object
-      required: true
-    Event:
+            type: object
+            properties:
+              entries:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Entry"
+          encoding:
+            entries:
+              style: form
+              explode: false
+    EventArray:
       content:
         application/json:
           schema:
@@ -476,7 +518,13 @@ components:
       name: api_key
       in: header
   schemas:
-
+    Entry:
+      type: object
+      properties:
+        name:
+          type: string
+        role:
+          type: string
     Group:
       type: object
       properties:
@@ -550,6 +598,14 @@ components:
         recruit_end_date:
           type: string
           format: date-time
+        organizer:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+        entries:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
         categories:
           type: array
           items:
@@ -580,4 +636,4 @@ components:
               - エラーメッセージ2
               - エラーメッセージ3
               - エラーメッセージ4
- 
+
