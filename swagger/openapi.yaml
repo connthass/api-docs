@@ -21,6 +21,47 @@ servers:
   - url: http://127.0.0.1:8083
   - url: https://127.0.0.1:8083
 paths:
+  /events:
+    get:
+      tags:
+        - event
+      summary: イベントを検索する
+      description: 記事の一覧を作成日時の降順で返します。
+      operationId: searchEvens
+      parameters:
+        - name: page
+          in: query
+          description: ページ番号 (1から100まで)
+          required: false
+          schema:
+            type: integer
+            format: int64
+        - name: per_page
+          in: query
+          description: 1ページあたりに含まれる要素数 (1から100まで)
+          required: false
+          schema:
+            type: integer
+            format: int64
+        - name: query
+          in: query
+          description: 検索クエリ
+          required: false
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Event"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/Event"
   /event:
     post:
       tags:
@@ -31,8 +72,8 @@ paths:
       requestBody:
         $ref: "#/components/requestBodies/Event"
       responses:
-        "405":
-          description: Invalid input
+        '201':
+          description: CREATED
       security:
         - event_auth:
             - write:events
@@ -78,13 +119,10 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Event"
-            application/xml:
-              schema:
-                $ref: "#/components/schemas/Event"
         "400":
           description: Invalid ID supplied
         "404":
-          description: Pet not found
+          description: Event not found
       security:
         - api_key: []
     post:
@@ -151,6 +189,96 @@ paths:
         - event_auth:
             - write:events
             - read:events
+  /category:
+    post:
+      tags:
+        - category
+      summary: Create category
+      description: This can only be done by the logged in user.
+      operationId: createCategory
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Category"
+        description: Created category object
+        required: true
+      responses:
+        default:
+          description: successful operation
+  /category{categoryId}:
+    get:
+      tags:
+      - "category"
+      summary: "Find pet by ID"
+      description: "Returns a single pet"
+      operationId: "getCategoryById"
+      parameters:
+        - name: categoryId
+          in: path
+          description: "ID of category to return"
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: "successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Category"
+        "400":
+          description: "Invalid ID supplied"
+        404:
+          description: "Pet not found"
+      security:
+      - api_key: []
+  /group:
+    post:
+      tags:
+        - group
+      summary: Create group
+      description: This can only be done by the logged in user.
+      operationId: createGroup
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/User"
+        description: Created user object
+        required: true
+      responses:
+        default:
+          description: successful operation
+  /group{groupId}:
+    get:
+      tags:
+      - "group"
+      summary: "Find pet by ID"
+      description: "Returns a single pet"
+      operationId: "getGroupById"
+      parameters:
+        - name: groupId
+          in: path
+          description: "ID of group to return"
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: "successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Group"
+        "400":
+          description: "Invalid ID supplied"
+        404:
+          description: "Pet not found"
+      security:
+      - api_key: []
   /user:
     post:
       tags:
@@ -166,8 +294,8 @@ paths:
         description: Created user object
         required: true
       responses:
-        default:
-          description: successful operation
+        '201':
+          description: CREATED
   /user/createWithArray:
     post:
       tags:
@@ -349,45 +477,22 @@ components:
       in: header
   schemas:
 
-    Categorize:
+    Group:
       type: object
       properties:
         id:
           type: integer
           format: int64
-        eventId:
-          type: integer
-          format: int64
-        categoryId:
-          type: integer
-          format: int64
-    Order:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-        petId:
-          type: integer
-          format: int64
-        quantity:
-          type: integer
-          format: int32
-        shipDate:
+        name:
           type: string
-          format: date-time
-        status:
+        description:
           type: string
-          description: Order Status
-          enum:
-            - placed
-            - approved
-            - delivered
-        complete:
-          type: boolean
-          default: false
-      xml:
-        name: Order
+        domain:
+          type: string
+        color_code:
+          type: string
+        image_path:
+          type: string
     Category:
       type: object
       properties:
@@ -404,34 +509,8 @@ components:
         id:
           type: integer
           format: int64
-        username:
-          type: string
-        firstName:
-          type: string
-        lastName:
-          type: string
-        email:
-          type: string
-        password:
-          type: string
-        phone:
-          type: string
-        userStatus:
-          type: integer
-          format: int32
-          description: User Status
-      xml:
-        name: User
-    Tag:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
         name:
           type: string
-      xml:
-        name: Tag
     Event:
       type: object
       required:
@@ -440,10 +519,6 @@ components:
         id:
           type: integer
           format: int64
-        categories:
-          type: array
-          items:
-            $ref: '#/components/schemas/Category'
         title:
           type: string
           example: 勉強会
@@ -454,13 +529,55 @@ components:
           type: integer
           format: int64
           example: 10
-    ApiResponse:
+        color_code:
+          type: string
+          example: #f0f8ff
+        image_url:
+          type: string
+          example: http://localhost:8000
+        qr_code_url:
+          type: string
+          example: http://localhost:8000
+        hold_start_date:
+          type: string
+          format: date-time
+        hold_end_date:
+          type: string
+          format: date-time
+        recruit_start_date:
+          type: string
+          format: date-time
+        recruit_end_date:
+          type: string
+          format: date-time
+        categories:
+          type: array
+          items:
+            $ref: '#/components/schemas/Category'
+        group:
+          $ref: '#/components/schemas/Group'
+        venue:
+          $ref: '#/components/schemas/Venue'
+    Venue:
+      type: object
+      required:
+        - name
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+    ErrorResponse:
       type: object
       properties:
-        code:
-          type: integer
-          format: int32
-        type:
-          type: string
-        message:
-          type: string
+        errors:
+          type: array
+          items:
+            type: string
+            example:
+              - エラーメッセージ1
+              - エラーメッセージ2
+              - エラーメッセージ3
+              - エラーメッセージ4
+ 
