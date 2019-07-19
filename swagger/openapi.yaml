@@ -57,7 +57,7 @@ paths:
             type: integer
             format: int64
       responses:
-        "200":
+        200:
           $ref: "#/components/responses/Events"
   /event:
     post:
@@ -69,8 +69,8 @@ paths:
       requestBody:
         $ref: "#/components/requestBodies/Event"
       responses:
-        '201':
-          $ref: "#/components/schemas/Event"
+        201:
+          $ref: "#/components/responses/Event"
   "/event/{eventId}":
     get:
       tags:
@@ -93,7 +93,7 @@ paths:
           schema:
             type: string
       responses:
-        "200":
+        200:
           $ref: "#/components/responses/Event"
       security:
         - api_key: []
@@ -113,7 +113,7 @@ paths:
             format: int64
       requestBody:
         content:
-          application/x-www-form-urlencoded:
+          application/json:
             schema:
               type: object
               properties:
@@ -188,7 +188,15 @@ paths:
             type: integer
             format: int64
       requestBody:
-        $ref: "#/components/requestBodies/Entry"
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                entries:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/Entry"
       responses:
         200:
           $ref: "#/components/responses/Entry"
@@ -313,7 +321,7 @@ paths:
       requestBody:
         $ref: "#/components/requestBodies/User"
       responses:
-        '200':
+        200:
           $ref: "#/components/responses/User"
 
   "/user/{name}":
@@ -387,20 +395,6 @@ paths:
           $ref: "#/components/responses/Events"
 components:
   requestBodies:
-    Entry:
-      content:
-        application/x-www-form-urlencoded:
-          schema:
-            type: object
-            properties:
-              entries:
-                type: array
-                items:
-                  $ref: "#/components/schemas/Entry"
-          encoding:
-            entries:
-              style: form
-              explode: false
     Event:
       description: 追加するためにはEventオブジェクトが必要です
       required: true
@@ -466,7 +460,7 @@ components:
     Entry:
       description: 参加したUserオブジェクトの配列を返します
       content:
-        application/x-www-form-urlencoded:
+        application/json:
           schema:
             type: object
             properties:
