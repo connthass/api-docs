@@ -5,6 +5,9 @@ info:
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
+externalDocs:
+  description: "Connthass APIの概要"
+  url: "https://github.com/connthass/api-docs/wiki/%E6%A6%82%E8%A6%81"
 tags:
   - name: event
     description: Operations about event
@@ -14,9 +17,6 @@ tags:
     description: Operations about group
   - name: user
     description: Operations about user
-    externalDocs:
-      description: Find out more about our store
-      url: http://swagger.io
 servers:
   - url: http://127.0.0.1:8083
   - url: https://127.0.0.1:8083
@@ -49,7 +49,7 @@ paths:
           schema:
             type: integer
             format: int64
-        - name: per_page
+        - name: perPage
           in: query
           description: "1ページあたりに含まれる要素数 (1から100まで)"
           required: false
@@ -72,7 +72,7 @@ paths:
         201:
           $ref: "#/components/responses/Event"
       security:
-         - bearerAuth: []
+         - ApiKeyAuth: []
   "/event/{eventId}":
     get:
       tags:
@@ -126,22 +126,22 @@ paths:
                 capacity:
                   description: Updated capacity of the event
                   type: string
-                image_url:
+                imageUrl:
                   type: string
                   description: イベントの画像
-                qr_code_url:
+                qrCodeUrl:
                   type: string
                   description: 投げ銭用のQRコード
-                hold_start_date:
+                holdStartDate:
                   type: string
                   format: date-time
-                hold_end_date:
+                holdEndDate:
                   type: string
                   format: date-time
-                recruit_start_date:
+                recruitStartDate:
                   type: string
                   format: date-time
-                recruit_end_date:
+                recruitEndDate:
                   type: string
                   format: date-time
                   
@@ -149,7 +149,7 @@ paths:
         200:
           $ref: "#/components/responses/Event"
       security:
-         - bearerAuth: []
+         - ApiKeyAuth: []
           
     delete:
       tags:
@@ -158,11 +158,6 @@ paths:
       description: ""
       operationId: deleteEvent
       parameters:
-        - name: api_key
-          in: header
-          required: false
-          schema:
-            type: string
         - name: eventId
           in: path
           description: Event id to delete
@@ -174,7 +169,26 @@ paths:
         "204":
           description: No Content
       security:
-        - bearerAuth: []
+        - ApiKeyAuth: []
+  /event/{eventId}/bookmark:
+    put:
+      tags:
+        - event
+      summary: イベントを「お気に入り」に追加する
+      description: bookmarks関連テーブルにレコードを追加します
+      operationId: addBookmark
+      parameters:
+        - name: eventId
+          in: path
+          description: name of user
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          description: No Content
+      security:
+         - ApiKeyAuth: []
             
   /event/{eventId}/entry:
     post:
@@ -205,7 +219,7 @@ paths:
         200:
           $ref: "#/components/responses/Entry"
       security:
-        - bearerAuth: []
+        - ApiKeyAuth: []
           
   /category:
     post:
@@ -220,9 +234,9 @@ paths:
         200:
           $ref: "#/components/responses/Category"
       security:
-         - bearerAuth: []
+         - ApiKeyAuth: []
           
-  /category{categoryId}:
+  /category/{categoryId}:
     get:
       tags:
       - "category"
@@ -240,6 +254,25 @@ paths:
       responses:
         200:
           $ref: "#/components/responses/Category"
+  /category/{categoryId}/like:
+    put:
+      tags:
+        - category
+      summary: カテゴリーに「いいね」する
+      description: likes関連テーブルにレコードを追加します
+      operationId: addLike
+      parameters:
+        - name: categoryId
+          in: path
+          description: name of user
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          description: No Content
+      security:
+         - ApiKeyAuth: []
   /group:
     post:
       tags:
@@ -253,7 +286,7 @@ paths:
         200:
           $ref: "#/components/responses/Group"
       security:
-         - bearerAuth: []
+         - ApiKeyAuth: []
   /group/{groupId}:
     get:
       tags:
@@ -293,7 +326,7 @@ paths:
         200:
           $ref: "#/components/responses/User"
       security:
-         - bearerAuth: []
+         - ApiKeyAuth: []
   /group/{groupId}/member/{name}:
     delete:
       tags:
@@ -319,7 +352,7 @@ paths:
         "204":
           description: No Content
       security:
-         - bearerAuth: []
+         - ApiKeyAuth: []
 
   /user:
     post:
@@ -334,7 +367,7 @@ paths:
         200:
           $ref: "#/components/responses/User"
       security:
-         - bearerAuth: []
+         - ApiKeyAuth: []
 
   "/user/{name}":
     get:
@@ -372,7 +405,7 @@ paths:
         204:
           description: No content
       security:
-         - bearerAuth: []
+         - ApiKeyAuth: []
     delete:
       tags:
         - user
@@ -390,7 +423,7 @@ paths:
         "204":
           description: No Content
       security:
-         - bearerAuth: []
+         - ApiKeyAuth: []
   /user/{name}/new_events:
     get:
       tags:
@@ -405,12 +438,11 @@ paths:
           required: true
           schema:
             type: string
-            format: int64
       responses:
         200:
           $ref: "#/components/responses/Events"
       security:
-         - bearerAuth: []
+         - ApiKeyAuth: []
 components:
   requestBodies:
     Event:
@@ -487,10 +519,10 @@ components:
                 items:
                   $ref: "#/components/schemas/User"
   securitySchemes:
-    bearerAuth:            # arbitrary name for the security scheme
-      type: http
-      scheme: bearer
-      bearerFormat: JWT
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-KEY
   schemas:
     Entry:
       type: object
@@ -516,10 +548,10 @@ components:
         domain:
           type: string
           example: "dev-meeting"
-        color_code:
+        colorCode:
           type: string
           example: "#6495ed"
-        image_path:
+        imagePath:
           type: string
           example: "https://miro.medium.com/max/1200/1*aKVg84SP5oPV9fwOnbl6yQ.png"
     Category:
@@ -558,28 +590,28 @@ components:
           type: integer
           format: int64
           example: 10
-        color_code:
+        colorCode:
           type: string
-          example: #f0f8ff
-        image_url:
-          type: string
-          example: "https://miro.medium.com/max/1200/1*aKVg84SP5oPV9fwOnbl6yQ.png"
-        qr_code_url:
+          example: "#f0f8ff"
+        imageUrl:
           type: string
           example: "https://miro.medium.com/max/1200/1*aKVg84SP5oPV9fwOnbl6yQ.png"
-        hold_start_date:
+        qrCodeUrl:
+          type: string
+          example: "https://miro.medium.com/max/1200/1*aKVg84SP5oPV9fwOnbl6yQ.png"
+        holdStartDate:
           type: string
           format: date-time
           example: "2019/07/19 16:30:00"
-        hold_end_date:
+        holdEndDate:
           type: string
           format: date-time
           example: "2019/07/19 19:00:00"
-        recruit_start_date:
+        recruitStartDate:
           type: string
           format: date-time
           example: "2019/07/01 24:00:00"
-        recruit_end_date:
+        recruitEndDate:
           type: string
           format: date-time
           example: "2019/07/16 24:00:00"
