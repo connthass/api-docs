@@ -1,13 +1,13 @@
 
 # 概要
 
-このドキュメントではConnthass API v2の仕様について説明します。
+このドキュメントではConnthass APIの仕様について説明します。
 ## リクエスト
 
 APIとの全ての通信にはHTTPSプロトコルを利用します。アクセス先のホストには、Qiitaのデータを利用する場合には connthass.com を利用します
 ## パラメータ
 
-API v2へのリクエストには、GET、POST、PUT、PATCH、DELETEの5種類のHTTPメソッドを利用します。多くのAPIへのリクエストにはパラメータを含められますが、GETリクエストにパラメータを含める場合にはURIクエリを利用し、それ以外の場合にはリクエストボディを利用します。パラメータには、ページネーション用途など任意で渡すものと、投稿時の本文など必須のものが存在します。APIドキュメントには、各APIごとに送信可能なパラメータが記載されています。
+Connthass APIへのリクエストには、GET、POST、PUT、PATCH、DELETEの5種類のHTTPメソッドを利用します。多くのAPIへのリクエストにはパラメータを含められますが、GETリクエストにパラメータを含める場合にはURIクエリを利用し、それ以外の場合にはリクエストボディを利用します。パラメータには、ページネーション用途など任意で渡すものと、投稿時の本文など必須のものが存在します。APIドキュメントには、各APIごとに送信可能なパラメータが記載されています。
 ## 利用制限
 
 認証している状態ではユーザごとに1時間に1000回まで、認証していない状態ではIPアドレスごとに1時間に60回までリクエストを受け付けます。
@@ -19,7 +19,7 @@ API v2へのリクエストには、GET、POST、PUT、PATCH、DELETEの5種類�
 
 APIとのデータの送受信にはJSONを利用します。JSONをリクエストボディに含める場合、リクエストのContent-Typeヘッダにapplication/jsonを指定してください。但し、GETリクエストにバラメータを含める場合にはURIクエリを利用します。また、PUTリクエストまたはDELETEリクエストに対してはレスポンスボディが返却されません。日時を表現する場合には、ISO 8601形式の文字列を利用します。
 
-GET /api/v2/items?page=1&per_page=20 HTTP/1.1
+GET /api/v1/items?page=1&per_page=20 HTTP/1.1
 
 ## エラーレスポンス
 
@@ -47,10 +47,10 @@ HTTPレスポンスボディ
 ページを指定できるAPIでは、Linkヘッダ を含んだレスポンスを返します。Linkヘッダには、最初のページと最後のページへのリンクに加え、存在する場合には次のページと前のページへのリンクが含まれます。個々のリンクにはそれぞれ、first、last、next、prevという値を含んだrel属性が紐付けられます。
 
 ```
-Link: <https://connthass.com/api/v2/events?page=1>; rel="first",
-      <https://connthass.com/api/v2/events?page=1>; rel="prev",
-      <https://connthass.com/api/v2/events?page=3>; rel="next",
-      <https://connthass.com/api/v2/events?page=6>; rel="last"
+Link: <https://connthass.com/api/v1/events?page=1>; rel="first",
+      <https://connthass.com/api/v1/events?page=1>; rel="prev",
+      <https://connthass.com/api/v1/events?page=3>; rel="next",
+      <https://connthass.com/api/v1/events?page=6>; rel="last"
 ```
 
 また、ページを指定できるAPIでは、要素の合計数が Total-Count レスポンスヘッダに含まれます。
