@@ -7,11 +7,11 @@ info:
     url: http://www.apache.org/licenses/LICENSE-2.0.html
 tags:
   - name: event
-    description: Connthass Event
+    description: Operations about event
   - name: category
-    description: Connthass Category
+    description: Operations about category
   - name: group
-    description: Connthass Category
+    description: Operations about group
   - name: user
     description: Operations about user
     externalDocs:
@@ -44,14 +44,14 @@ paths:
             format: int64
         - name: page
           in: query
-          description: ページ番号 (1から100まで)
+          description: "ページ番号 (1から100まで)"
           required: false
           schema:
             type: integer
             format: int64
         - name: per_page
           in: query
-          description: 1ページあたりに含まれる要素数 (1から100まで)
+          description: "1ページあたりに含まれる要素数 (1から100まで)"
           required: false
           schema:
             type: integer
@@ -71,6 +71,8 @@ paths:
       responses:
         201:
           $ref: "#/components/responses/Event"
+      security:
+         - bearerAuth: []
   "/event/{eventId}":
     get:
       tags:
@@ -95,8 +97,6 @@ paths:
       responses:
         200:
           $ref: "#/components/responses/Event"
-      security:
-        - api_key: []
     patch:
       tags:
         - event
@@ -148,6 +148,8 @@ paths:
       responses:
         200:
           $ref: "#/components/responses/Event"
+      security:
+         - bearerAuth: []
           
     delete:
       tags:
@@ -171,6 +173,8 @@ paths:
       responses:
         "204":
           description: No Content
+      security:
+        - bearerAuth: []
             
   /event/{eventId}/entry:
     post:
@@ -200,12 +204,14 @@ paths:
       responses:
         200:
           $ref: "#/components/responses/Entry"
+      security:
+        - bearerAuth: []
           
   /category:
     post:
       tags:
         - category
-      summary: Create category
+      summary: カテゴリを作成する
       description: This can only be done by the logged in user.
       operationId: createCategory
       requestBody:
@@ -213,6 +219,8 @@ paths:
       responses:
         200:
           $ref: "#/components/responses/Category"
+      security:
+         - bearerAuth: []
           
   /category{categoryId}:
     get:
@@ -232,13 +240,11 @@ paths:
       responses:
         200:
           $ref: "#/components/responses/Category"
-      security:
-      - api_key: []
   /group:
     post:
       tags:
         - group
-      summary: Create group
+      summary: グループを作成する
       description: This can only be done by the logged in user.
       operationId: createGroup
       requestBody:
@@ -246,11 +252,13 @@ paths:
       responses:
         200:
           $ref: "#/components/responses/Group"
+      security:
+         - bearerAuth: []
   /group/{groupId}:
     get:
       tags:
       - group
-      summary: "Find group by ID"
+      summary: グループ情報を取得する
       description: "Returns a single group"
       operationId: "getGroupById"
       parameters:
@@ -264,8 +272,6 @@ paths:
       responses:
         200:
           $ref: "#/components/responses/Group"
-      security:
-      - api_key: []
   /group/{groupId}/member:
     post:
       tags:
@@ -286,6 +292,8 @@ paths:
       responses:
         200:
           $ref: "#/components/responses/User"
+      security:
+         - bearerAuth: []
   /group/{groupId}/member/{name}:
     delete:
       tags:
@@ -310,12 +318,14 @@ paths:
       responses:
         "204":
           description: No Content
+      security:
+         - bearerAuth: []
 
   /user:
     post:
       tags:
         - user
-      summary: Create user
+      summary: ユーザを作成する
       description: This can only be done by the logged in user.
       operationId: createUser
       requestBody:
@@ -323,12 +333,14 @@ paths:
       responses:
         200:
           $ref: "#/components/responses/User"
+      security:
+         - bearerAuth: []
 
   "/user/{name}":
     get:
       tags:
         - user
-      summary: Get user by user name
+      summary: ユーザ名から情報を取得
       description: ""
       operationId: getUserByName
       parameters:
@@ -344,7 +356,7 @@ paths:
     put:
       tags:
         - user
-      summary: Updated user
+      summary: ユーザ情報を更新
       description: This can only be done by the logged in user.
       operationId: updateUser
       parameters:
@@ -359,10 +371,12 @@ paths:
       responses:
         204:
           description: No content
+      security:
+         - bearerAuth: []
     delete:
       tags:
         - user
-      summary: Delete user
+      summary: ユーザを削除
       description: This can only be done by the logged in user.
       operationId: deleteUser
       parameters:
@@ -375,11 +389,13 @@ paths:
       responses:
         "204":
           description: No Content
+      security:
+         - bearerAuth: []
   /user/{name}/new_events:
     get:
       tags:
         - user
-      summary: Get new events for user by name
+      summary: 新着イベントを取得する
       description: ""
       operationId: getNewEvents
       parameters:
@@ -393,6 +409,8 @@ paths:
       responses:
         200:
           $ref: "#/components/responses/Events"
+      security:
+         - bearerAuth: []
 components:
   requestBodies:
     Event:
@@ -469,18 +487,20 @@ components:
                 items:
                   $ref: "#/components/schemas/User"
   securitySchemes:
-    api_key:
-      type: apiKey
-      name: api_key
-      in: header
+    bearerAuth:            # arbitrary name for the security scheme
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
   schemas:
     Entry:
       type: object
       properties:
         name:
           type: string
+          example: "Hogehoge Taro"
         role:
           type: string
+          example: "Basic User"
     Group:
       type: object
       properties:
@@ -489,14 +509,19 @@ components:
           format: int64
         name:
           type: string
+          example: "開発部勉強会"
         description:
           type: string
+          example: "月一で勉強会をするよ"
         domain:
           type: string
+          example: "dev-meeting"
         color_code:
           type: string
+          example: "#6495ed"
         image_path:
           type: string
+          example: "https://miro.medium.com/max/1200/1*aKVg84SP5oPV9fwOnbl6yQ.png"
     Category:
       type: object
       properties:
@@ -505,8 +530,7 @@ components:
           format: int64
         name:
           type: string
-      xml:
-        name: category
+          example: "Gophar"
     User:
       type: object
       properties:
@@ -515,6 +539,7 @@ components:
           format: int64
         name:
           type: string
+          example: "Hogehoge Taro"
     Event:
       type: object
       required:
@@ -525,7 +550,7 @@ components:
           format: int64
         title:
           type: string
-          example: 勉強会
+          example: 合同勉強会
         description:
           type: string
           example: エンジニア集まれ
@@ -538,22 +563,26 @@ components:
           example: #f0f8ff
         image_url:
           type: string
-          example: http://localhost:8000
+          example: "https://miro.medium.com/max/1200/1*aKVg84SP5oPV9fwOnbl6yQ.png"
         qr_code_url:
           type: string
-          example: http://localhost:8000
+          example: "https://miro.medium.com/max/1200/1*aKVg84SP5oPV9fwOnbl6yQ.png"
         hold_start_date:
           type: string
           format: date-time
+          example: "2019/07/19 16:30:00"
         hold_end_date:
           type: string
           format: date-time
+          example: "2019/07/19 19:00:00"
         recruit_start_date:
           type: string
           format: date-time
+          example: "2019/07/01 24:00:00"
         recruit_end_date:
           type: string
           format: date-time
+          example: "2019/07/16 24:00:00"
         organizer:
           type: array
           items:
@@ -580,4 +609,4 @@ components:
           format: int64
         name:
           type: string
-
+          example: "Village"
