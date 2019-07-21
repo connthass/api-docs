@@ -434,7 +434,7 @@ paths:
           description: No Content
       security:
          - ApiKeyAuth: []
-  /user/{name}/new_events:
+  /user/{name}/newEvents:
     get:
       tags:
         - user
