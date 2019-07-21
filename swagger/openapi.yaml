@@ -6,8 +6,8 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
 externalDocs:
-  description: "Connthass APIの概要"
-  url: "https://github.com/connthass/api-docs/wiki/%E6%A6%82%E8%A6%81"
+  description: 'Connthass APIの概要'
+  url: 'https://github.com/connthass/api-docs/wiki/%E6%A6%82%E8%A6%81'
 tags:
   - name: event
     description: Operations about event
@@ -44,38 +44,38 @@ paths:
             format: int64
         - name: page
           in: query
-          description: "ページ番号 (1から100まで)"
+          description: 'ページ番号 (1から100まで)'
           required: false
           schema:
             type: integer
             format: int64
         - name: perPage
           in: query
-          description: "1ページあたりに含まれる要素数 (1から100まで)"
+          description: '1ページあたりに含まれる要素数 (1から100まで)'
           required: false
           schema:
             type: integer
             format: int64
       responses:
         200:
-          $ref: "#/components/responses/Events"
+          $ref: '#/components/responses/Events'
       security:
-         - ApiKeyAuth: []
+        - ApiKeyAuth: []
   /event:
     post:
       tags:
         - event
       summary: イベントを追加する
-      description: ""
+      description: ''
       operationId: addEvent
       requestBody:
-        $ref: "#/components/requestBodies/Event"
+        $ref: '#/components/requestBodies/Event'
       responses:
         201:
-          $ref: "#/components/responses/Event"
+          $ref: '#/components/responses/Event'
       security:
-         - ApiKeyAuth: []
-  "/event/{eventId}":
+        - ApiKeyAuth: []
+  '/event/{eventId}':
     get:
       tags:
         - event
@@ -98,14 +98,14 @@ paths:
             type: string
       responses:
         200:
-          $ref: "#/components/responses/Event"
+          $ref: '#/components/responses/Event'
       security:
-         - ApiKeyAuth: []
+        - ApiKeyAuth: []
     patch:
       tags:
         - event
       summary: 特定のイベントを更新する
-      description: ""
+      description: ''
       operationId: updateEvent
       parameters:
         - name: eventId
@@ -148,18 +148,18 @@ paths:
                 recruitEndDate:
                   type: string
                   format: date-time
-                  
+
       responses:
         200:
-          $ref: "#/components/responses/Event"
+          $ref: '#/components/responses/Event'
       security:
-         - ApiKeyAuth: []
-          
+        - ApiKeyAuth: []
+
     delete:
       tags:
         - event
       summary: 特定のイベントを削除する
-      description: ""
+      description: ''
       operationId: deleteEvent
       parameters:
         - name: eventId
@@ -170,7 +170,7 @@ paths:
             type: integer
             format: int64
       responses:
-        "204":
+        '204':
           description: No Content
       security:
         - ApiKeyAuth: []
@@ -189,11 +189,11 @@ paths:
           schema:
             type: string
       responses:
-        "204":
+        '204':
           description: No Content
       security:
-         - ApiKeyAuth: []
-            
+        - ApiKeyAuth: []
+
   /event/{eventId}/entry:
     post:
       tags:
@@ -218,13 +218,13 @@ paths:
                 entries:
                   type: array
                   items:
-                    $ref: "#/components/schemas/Entry"
+                    $ref: '#/components/schemas/Entry'
       responses:
         200:
-          $ref: "#/components/responses/Entry"
+          $ref: '#/components/responses/Entry'
       security:
         - ApiKeyAuth: []
-          
+
   /category:
     post:
       tags:
@@ -233,33 +233,33 @@ paths:
       description: This can only be done by the logged in user.
       operationId: createCategory
       requestBody:
-        $ref: "#/components/requestBodies/Category"
+        $ref: '#/components/requestBodies/Category'
       responses:
         200:
-          $ref: "#/components/responses/Category"
+          $ref: '#/components/responses/Category'
       security:
-         - ApiKeyAuth: []
-          
+        - ApiKeyAuth: []
+
   /category/{categoryId}:
     get:
       tags:
-      - "category"
+        - 'category'
       summary: IDからカテゴリを取得
       description: カテゴリを一つ返します
-      operationId: "getCategoryById"
+      operationId: 'getCategoryById'
       parameters:
         - name: categoryId
           in: path
-          description: "ID of category to return"
+          description: 'ID of category to return'
           required: true
           schema:
             type: integer
             format: int64
       responses:
         200:
-          $ref: "#/components/responses/Category"
+          $ref: '#/components/responses/Category'
       security:
-         - ApiKeyAuth: []
+        - ApiKeyAuth: []
   /category/{categoryId}/like:
     put:
       tags:
@@ -275,10 +275,10 @@ paths:
           schema:
             type: string
       responses:
-        "204":
+        '204':
           description: No Content
       security:
-         - ApiKeyAuth: []
+        - ApiKeyAuth: []
   /group:
     post:
       tags:
@@ -287,32 +287,32 @@ paths:
       description: This can only be done by the logged in user.
       operationId: createGroup
       requestBody:
-        $ref: "#/components/requestBodies/Group"
+        $ref: '#/components/requestBodies/Group'
       responses:
         200:
-          $ref: "#/components/responses/Group"
+          $ref: '#/components/responses/Group'
       security:
-         - ApiKeyAuth: []
+        - ApiKeyAuth: []
   /group/{groupId}:
     get:
       tags:
-      - group
+        - group
       summary: グループ情報を取得する
-      description: "Returns a single group"
-      operationId: "getGroupById"
+      description: 'Returns a single group'
+      operationId: 'getGroupById'
       parameters:
         - name: groupId
           in: path
-          description: "ID of group to return"
+          description: 'ID of group to return'
           required: true
           schema:
             type: integer
             format: int64
       responses:
         200:
-          $ref: "#/components/responses/Group"
+          $ref: '#/components/responses/Group'
       security:
-         - ApiKeyAuth: []
+        - ApiKeyAuth: []
   /group/{groupId}/member:
     post:
       tags:
@@ -329,18 +329,18 @@ paths:
             type: integer
             format: int64
       requestBody:
-        $ref: "#/components/requestBodies/User"
+        $ref: '#/components/requestBodies/User'
       responses:
         200:
-          $ref: "#/components/responses/User"
+          $ref: '#/components/responses/User'
       security:
-         - ApiKeyAuth: []
+        - ApiKeyAuth: []
   /group/{groupId}/member/{name}:
     delete:
       tags:
         - group
       summary: メンバーを削除する
-      description: ""
+      description: ''
       operationId: deleteMember
       parameters:
         - name: groupId
@@ -357,10 +357,10 @@ paths:
           schema:
             type: string
       responses:
-        "204":
+        '204':
           description: No Content
       security:
-         - ApiKeyAuth: []
+        - ApiKeyAuth: []
 
   /user:
     post:
@@ -370,32 +370,32 @@ paths:
       description: This can only be done by the logged in user.
       operationId: createUser
       requestBody:
-        $ref: "#/components/requestBodies/User"
+        $ref: '#/components/requestBodies/User'
       responses:
         200:
-          $ref: "#/components/responses/User"
+          $ref: '#/components/responses/User'
       security:
-         - ApiKeyAuth: []
+        - ApiKeyAuth: []
 
-  "/user/{name}":
+  '/user/{name}':
     get:
       tags:
         - user
       summary: ユーザ名から情報を取得
-      description: ""
+      description: ''
       operationId: getUserByName
       parameters:
         - name: name
           in: path
-          description: "The name that needs to be fetched. Use user1 for testing."
+          description: 'The name that needs to be fetched. Use user1 for testing.'
           required: true
           schema:
             type: string
       responses:
         200:
-          $ref: "#/components/responses/User"
+          $ref: '#/components/responses/User'
       security:
-         - ApiKeyAuth: []
+        - ApiKeyAuth: []
     put:
       tags:
         - user
@@ -410,12 +410,12 @@ paths:
           schema:
             type: string
       requestBody:
-        $ref: "#/components/requestBodies/User"
+        $ref: '#/components/requestBodies/User'
       responses:
         204:
           description: No content
       security:
-         - ApiKeyAuth: []
+        - ApiKeyAuth: []
     delete:
       tags:
         - user
@@ -430,16 +430,16 @@ paths:
           schema:
             type: string
       responses:
-        "204":
+        '204':
           description: No Content
       security:
-         - ApiKeyAuth: []
+        - ApiKeyAuth: []
   /user/{name}/newEvents:
     get:
       tags:
         - user
       summary: 新着イベントを取得する
-      description: ""
+      description: ''
       operationId: getNewEvents
       parameters:
         - name: name
@@ -450,9 +450,9 @@ paths:
             type: string
       responses:
         200:
-          $ref: "#/components/responses/Events"
+          $ref: '#/components/responses/Events'
       security:
-         - ApiKeyAuth: []
+        - ApiKeyAuth: []
 components:
   requestBodies:
     Event:
@@ -461,35 +461,35 @@ components:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/Event"
+            $ref: '#/components/schemas/Event'
     Category:
       description: 追加するためにはCategoryオブジェクトが必要です
       required: true
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/Category"
+            $ref: '#/components/schemas/Category'
     User:
       description: 追加するためにはUserオブジェクトが必要です
       required: true
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/Event"
+            $ref: '#/components/schemas/Event'
     Group:
       description: 追加するためにはGroupオブジェクトが必要です
       required: true
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/Group"
+            $ref: '#/components/schemas/Group'
   responses:
     Event:
       description: 追加または更新されたEventオブジェクトを返します
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/Event"
+            $ref: '#/components/schemas/Event'
     Events:
       description: OK
       content:
@@ -497,26 +497,26 @@ components:
           schema:
             type: array
             items:
-              $ref: "#/components/schemas/Event"
+              $ref: '#/components/schemas/Event'
     Category:
       description: 追加または更新されたCategoryオブジェクトを返します
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/Category"
+            $ref: '#/components/schemas/Category'
     User:
       description: 追加または更新されたUserオブジェクトを返します
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/User"
-            
+            $ref: '#/components/schemas/User'
+
     Group:
       description: 追加または更新されたGroupオブジェクトを返します
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/Group"
+            $ref: '#/components/schemas/Group'
     Entry:
       description: 参加したUserオブジェクトの配列を返します
       content:
@@ -527,7 +527,7 @@ components:
               entries:
                 type: array
                 items:
-                  $ref: "#/components/schemas/User"
+                  $ref: '#/components/schemas/User'
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
@@ -539,10 +539,10 @@ components:
       properties:
         name:
           type: string
-          example: "Hogehoge Taro"
+          example: 'Hogehoge Taro'
         role:
           type: string
-          example: "Basic User"
+          example: 'Basic User'
     Group:
       type: object
       properties:
@@ -551,19 +551,19 @@ components:
           format: int64
         name:
           type: string
-          example: "開発部勉強会"
+          example: '開発部勉強会'
         description:
           type: string
-          example: "月一で勉強会をするよ"
+          example: '月一で勉強会をするよ'
         domain:
           type: string
-          example: "dev-meeting"
+          example: 'dev-meeting'
         colorCode:
           type: string
-          example: "#6495ed"
+          example: '#6495ed'
         imagePath:
           type: string
-          example: "https://miro.medium.com/max/1200/1*aKVg84SP5oPV9fwOnbl6yQ.png"
+          example: 'https://miro.medium.com/max/1200/1*aKVg84SP5oPV9fwOnbl6yQ.png'
     Category:
       type: object
       properties:
@@ -572,7 +572,7 @@ components:
           format: int64
         name:
           type: string
-          example: "Gophar"
+          example: 'Gophar'
     User:
       type: object
       properties:
@@ -581,7 +581,7 @@ components:
           format: int64
         name:
           type: string
-          example: "Hogehoge Taro"
+          example: 'Hogehoge Taro'
     Event:
       type: object
       required:
@@ -602,29 +602,29 @@ components:
           example: 10
         colorCode:
           type: string
-          example: "#f0f8ff"
+          example: '#f0f8ff'
         imageUrl:
           type: string
-          example: "https://miro.medium.com/max/1200/1*aKVg84SP5oPV9fwOnbl6yQ.png"
+          example: 'https://miro.medium.com/max/1200/1*aKVg84SP5oPV9fwOnbl6yQ.png'
         qrCodeUrl:
           type: string
-          example: "https://miro.medium.com/max/1200/1*aKVg84SP5oPV9fwOnbl6yQ.png"
+          example: 'https://miro.medium.com/max/1200/1*aKVg84SP5oPV9fwOnbl6yQ.png'
         holdStartDate:
           type: string
           format: date-time
-          example: "2019/07/19 16:30:00"
+          example: '2019/07/19 16:30:00'
         holdEndDate:
           type: string
           format: date-time
-          example: "2019/07/19 19:00:00"
+          example: '2019/07/19 19:00:00'
         recruitStartDate:
           type: string
           format: date-time
-          example: "2019/07/01 24:00:00"
+          example: '2019/07/01 24:00:00'
         recruitEndDate:
           type: string
           format: date-time
-          example: "2019/07/16 24:00:00"
+          example: '2019/07/16 24:00:00'
         organizer:
           type: array
           items:
@@ -651,4 +651,4 @@ components:
           format: int64
         name:
           type: string
-          example: "Village"
+          example: 'Village'
