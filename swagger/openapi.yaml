@@ -59,6 +59,8 @@ paths:
       responses:
         200:
           $ref: "#/components/responses/Events"
+      security:
+         - ApiKeyAuth: []
   /event:
     post:
       tags:
@@ -97,6 +99,8 @@ paths:
       responses:
         200:
           $ref: "#/components/responses/Event"
+      security:
+         - ApiKeyAuth: []
     patch:
       tags:
         - event
@@ -254,6 +258,8 @@ paths:
       responses:
         200:
           $ref: "#/components/responses/Category"
+      security:
+         - ApiKeyAuth: []
   /category/{categoryId}/like:
     put:
       tags:
@@ -305,6 +311,8 @@ paths:
       responses:
         200:
           $ref: "#/components/responses/Group"
+      security:
+         - ApiKeyAuth: []
   /group/{groupId}/member:
     post:
       tags:
@@ -379,13 +387,15 @@ paths:
       parameters:
         - name: name
           in: path
-          description: "The name that needs to be fetched. Use user1 for testing. "
+          description: "The name that needs to be fetched. Use user1 for testing."
           required: true
           schema:
             type: string
       responses:
         200:
           $ref: "#/components/responses/User"
+      security:
+         - ApiKeyAuth: []
     put:
       tags:
         - user
