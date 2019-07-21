@@ -27,7 +27,7 @@ paths:
         - event
       summary: イベントを検索する
       description: 記事の一覧を作成日時の降順で返します。
-      operationId: searchEvens
+      operationId: searchEvents
       parameters:
         - name: fields
           in: query
