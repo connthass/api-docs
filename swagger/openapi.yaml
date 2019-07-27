@@ -29,32 +29,10 @@ paths:
       description: 記事の一覧を作成日時の降順で返します。
       operationId: searchEvents
       parameters:
-        - name: fields
-          in: query
-          description: 検索結果で取得するフィールドをカンマ区切りで指定
-          required: false
-          schema:
-            type: string
-        - name: query
-          in: query
-          description: 検索クエリ
-          required: false
-          schema:
-            type: string
-        - name: page
-          in: query
-          description: 'ページ番号 (1から100まで)'
-          required: false
-          schema:
-            type: integer
-            format: int64
-        - name: perPage
-          in: query
-          description: '1ページあたりに含まれる要素数 (1から100まで)'
-          required: false
-          schema:
-            type: integer
-            format: int64
+        - $ref: '#/components/parameters/Fields'
+        - $ref: '#/components/parameters/Query'
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PerPage'
       responses:
         200:
           $ref: '#/components/responses/Events'
@@ -447,6 +425,37 @@ paths:
       security:
         - ApiKeyAuth: []
 components:
+  parameters:
+    Fields:
+      name: fields
+      in: query
+      description: 検索結果で取得するフィールドをカンマ区切りで指定
+      required: false
+      schema:
+        type: string
+    Query:
+      name: query
+      in: query
+      description: 検索クエリ
+      required: false
+      schema:
+        type: string
+    Page:
+      name: page
+      in: query
+      description: 'ページ番号 (1から100まで)'
+      required: false
+      schema:
+        type: integer
+        format: int64
+    PerPage:
+      name: perPage
+      in: query
+      description: '1ページあたりに含まれる要素数 (1から100まで)'
+      required: false
+      schema:
+        type: integer
+        format: int64
   requestBodies:
     Event:
       description: 追加するためにはEventオブジェクトが必要です
