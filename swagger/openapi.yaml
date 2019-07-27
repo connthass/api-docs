@@ -252,6 +252,23 @@ paths:
           description: No Content
       security:
         - ApiKeyAuth: []
+  /groups:
+    get:
+      tags:
+        - group
+      summary: グループを検索する
+      description: グループの一覧を作成日時の降順で返します。
+      operationId: searchGroups
+      parameters:
+        - $ref: '#/components/parameters/Fields'
+        - $ref: '#/components/parameters/Query'
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PerPage'
+      responses:
+        200:
+          $ref: '#/components/responses/Groups'
+      security:
+        - ApiKeyAuth: []
   /group:
     post:
       tags:
@@ -493,7 +510,7 @@ components:
           schema:
             $ref: '#/components/schemas/Event'
     Events:
-      description: OK
+      description: イベント検索後のイベントの一覧を返します
       content:
         application/json:
           schema:
@@ -512,13 +529,20 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/User'
-
     Group:
       description: 追加または更新されたGroupオブジェクトを返します
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Group'
+    Groups:
+      description: グループ検索後のグループの一覧を返します
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/Group'
     Entry:
       description: 参加したUserオブジェクトの配列を返します
       content:
