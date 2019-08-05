@@ -563,6 +563,9 @@ components:
     Entry:
       type: object
       properties:
+        id:
+          type: integer
+          format: int64
         name:
           type: string
           example: 'Hogehoge Taro'
@@ -662,7 +665,7 @@ components:
         entries:
           type: array
           items:
-            $ref: '#/components/schemas/User'
+            $ref: '#/components/schemas/Entry'
         categories:
           type: array
           items:
