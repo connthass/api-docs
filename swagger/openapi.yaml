@@ -325,7 +325,7 @@ paths:
           $ref: '#/components/responses/User'
       security:
         - ApiKeyAuth: []
-  /group/{groupId}/member/{name}:
+  /group/{groupId}/member/{uid}:
     delete:
       tags:
         - group
@@ -340,9 +340,9 @@ paths:
           schema:
             type: integer
             format: int64
-        - name: name
+        - name: uid
           in: path
-          description: ユーザ名
+          description: ユーザID
           required: true
           schema:
             type: string
@@ -365,15 +365,15 @@ paths:
           $ref: '#/components/responses/User'
       security:
         - ApiKeyAuth: []
-  /user/{name}:
+  /user/{uid}:
     get:
       tags:
         - user
       summary: ユーザ名から情報を取得
       description: ''
-      operationId: getUserByName
+      operationId: getUserByUID
       parameters:
-        - name: name
+        - name: uid
           in: path
           description: 'The name that needs to be fetched. Use user1 for testing.'
           required: true
@@ -391,9 +391,9 @@ paths:
       description: This can only be done by the logged in user.
       operationId: updateUser
       parameters:
-        - name: name
+        - name: uid
           in: path
-          description: name that need to be updated
+          description: The uid that need to be updated
           required: true
           schema:
             type: string
@@ -411,9 +411,9 @@ paths:
       description: This can only be done by the logged in user.
       operationId: deleteUser
       parameters:
-        - name: name
+        - name: uid
           in: path
-          description: The name that needs to be deleted
+          description: The uid that needs to be deleted
           required: true
           schema:
             type: string
@@ -422,7 +422,7 @@ paths:
           description: No Content
       security:
         - ApiKeyAuth: []
-  /user/{name}/newEvents:
+  /user/{uid}/newEvents:
     get:
       tags:
         - user
@@ -430,9 +430,9 @@ paths:
       description: ''
       operationId: getNewEvents
       parameters:
-        - name: name
+        - name: uid
           in: path
-          description: name of user
+          description: uid of user
           required: true
           schema:
             type: string
@@ -608,6 +608,9 @@ components:
         name:
           type: string
           example: 'Hogehoge Taro'
+        uid:
+          type: integer
+          format: int64
     Event:
       type: object
       required:
