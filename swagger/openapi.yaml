@@ -587,7 +587,7 @@ components:
         colorCode:
           type: string
           example: '#6495ed'
-        imagePath:
+        imageUrl:
           type: string
           example: 'https://miro.medium.com/max/1200/1*aKVg84SP5oPV9fwOnbl6yQ.png'
     Category:
@@ -611,6 +611,7 @@ components:
         uid:
           type: integer
           format: int64
+          example: 'zxcvbnm123456789'
     Event:
       type: object
       required:
