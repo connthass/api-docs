@@ -665,7 +665,7 @@ components:
         entries:
           type: array
           items:
-            $ref: '#/components/schemas/Entry'
+            $ref: '#/components/schemas/User'
         categories:
           type: array
           items:
