@@ -494,7 +494,15 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Event'
+            type: object
+            properties:
+              uid:
+                type: integer
+                format: int64
+                example: 'ac85b9f0d13726934e236548ed6b95184d2603a2'
+              name:
+                type: string
+                example: 'Hogehoge Taro'
     Group:
       description: 追加するためにはGroupオブジェクトが必要です
       required: true
@@ -614,7 +622,7 @@ components:
         uid:
           type: integer
           format: int64
-          example: 'zxcvbnm123456789'
+          example: 'ac85b9f0d13726934e236548ed6b95184d2603a2'
     Event:
       type: object
       required:
