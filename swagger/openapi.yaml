@@ -309,7 +309,7 @@ paths:
         - group
       summary: グループ情報内イベント群を取得する
       description: 'Returns a single group'
-      operationId: 'getGroupEventsById'
+      operationId: searchGroupEventsById
       parameters:
         - name: groupId
           in: path
