@@ -620,9 +620,6 @@ components:
         name:
           type: string
           example: 'Hogehoge Taro'
-        uid:
-          type: string
-          example: 'ac85b9f0d13726934e236548ed6b95184d2603a2'
     Event:
       type: object
       required:
