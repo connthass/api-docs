@@ -185,15 +185,7 @@ paths:
             type: integer
             format: int64
       requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                entries:
-                  type: array
-                  items:
-                    $ref: '#/components/schemas/Entry'
+        $ref: '#/components/requestBodies/Entry'
       responses:
         200:
           $ref: '#/components/responses/Entry'
@@ -474,6 +466,13 @@ components:
         type: integer
         format: int64
   requestBodies:
+    Entry:
+      description: 追加するためにはUserオブジェクトの配列が必要です
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Entry'
     Event:
       description: 追加するためにはEventオブジェクトが必要です
       required: true
@@ -561,6 +560,10 @@ components:
                 type: array
                 items:
                   $ref: '#/components/schemas/User'
+              organizer:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
@@ -570,15 +573,14 @@ components:
     Entry:
       type: object
       properties:
-        id:
-          type: integer
-          format: int64
-        name:
-          type: string
-          example: 'Hogehoge Taro'
-        role:
-          type: string
-          example: 'Basic User'
+        entries:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+        organizer:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
     Group:
       type: object
       properties:
