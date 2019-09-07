@@ -295,6 +295,26 @@ paths:
           $ref: '#/components/responses/Group'
       security:
         - ApiKeyAuth: []
+  /group/{groupId}/events:
+    get:
+      tags:
+        - group
+      summary: グループ情報内イベント群を取得する
+      description: 'Returns a single group'
+      operationId: searchGroupEventsById
+      parameters:
+        - name: groupId
+          in: path
+          description: 'ID of group to return'
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          $ref: '#/components/responses/Events'
+      security:
+        - ApiKeyAuth: []
   /group/{groupId}/member:
     post:
       tags:
