@@ -106,7 +106,7 @@ paths:
                   type: string
                 capacity:
                   description: Updated capacity of the event
-                  type: string
+                  type: integer
                 imageUrl:
                   type: string
                   description: イベントの画像
@@ -655,8 +655,8 @@ components:
           type: string
           example: エンジニア集まれ
         capacity:
-          type: string
-          example: '50'
+          type: integer
+          example: 50
         colorCode:
           type: string
           example: '#f0f8ff'
