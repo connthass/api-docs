@@ -671,7 +671,7 @@ components:
           type: string
           format: date-time
           example: '2019/07/16 24:00:00'
-        organizer:
+        organizers:
           type: array
           items:
             $ref: '#/components/schemas/User'
