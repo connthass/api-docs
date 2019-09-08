@@ -513,14 +513,7 @@ components:
       content:
         application/json:
           schema:
-            type: object
-            properties:
-              uid:
-                type: string
-                example: 'ac85b9f0d13726934e236548ed6b95184d2603a2'
-              name:
-                type: string
-                example: 'Hogehoge Taro'
+            $ref: '#/components/schemas/User'
     Group:
       description: 追加するためにはGroupオブジェクトが必要です
       required: true
