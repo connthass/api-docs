@@ -1,0 +1,8 @@
+- name: event
+  description: Operations about event
+- name: category
+  description: Operations about category
+- name: group
+  description: Operations about group
+- name: user
+  description: Operations about user
