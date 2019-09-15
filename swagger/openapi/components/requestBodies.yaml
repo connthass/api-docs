@@ -42,13 +42,6 @@ User:
     application/json:
       schema:
         $ref: "#/components/schemas/User"
-Group:
-  description: 追加するためにはGroupオブジェクトが必要です
-  required: true
-  content:
-    application/json:
-      schema:
-        $ref: "#/components/schemas/Group"
 
 CreateGroup:
   description: 追加するにはGroupオブジェクトが必要です
@@ -56,7 +49,7 @@ CreateGroup:
   content:
     application/json:
       schema:
-        $ref: "#/components/schemas/CreateGroupRequestBody"
+        $ref: "#/components/schemas/Group"
       examples:
         EntryEventRequestBody:
           $ref: "#/components/examples/CreateGroupRequestBody"
