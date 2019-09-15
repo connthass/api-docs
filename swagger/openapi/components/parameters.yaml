@@ -1,0 +1,40 @@
+Fields:
+  name: fields
+  in: query
+  description: 検索結果で取得するフィールドをカンマ区切りで指定
+  required: false
+  schema:
+    type: string
+Query:
+  name: query
+  in: query
+  description: 検索クエリ
+  required: false
+  schema:
+    type: string
+Page:
+  name: page
+  in: query
+  description: "ページ番号 (1から100まで)"
+  required: false
+  schema:
+    type: integer
+    format: int64
+  examples:
+    min:
+      value: 1
+    max:
+      value: 100
+PerPage:
+  name: perPage
+  in: query
+  description: "1ページあたりに含まれる要素数 (1から100まで)"
+  required: false
+  schema:
+    type: integer
+    format: int64
+  examples:
+    min:
+      value: 1
+    max:
+      value: 100

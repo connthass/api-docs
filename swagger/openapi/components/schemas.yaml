@@ -1,0 +1,95 @@
+Entry:
+  type: object
+  properties:
+    entries:
+      type: array
+      items:
+        $ref: "#/components/schemas/User"
+    organizers:
+      type: array
+      items:
+        $ref: "#/components/schemas/User"
+Group:
+  type: object
+  properties:
+    id:
+      type: string
+    name:
+      type: string
+    description:
+      type: string
+    domain:
+      type: string
+    colorCode:
+      type: string
+    imageUrl:
+      type: string
+Category:
+  type: object
+  properties:
+    id:
+      type: string
+    name:
+      type: string
+User:
+  type: object
+  properties:
+    id:
+      type: string
+    name:
+      type: string
+Event:
+  type: object
+  properties:
+    id:
+      type: string
+    title:
+      type: string
+    description:
+      type: string
+    capacity:
+      type: integer
+    colorCode:
+      type: string
+    imageUrl:
+      type: string
+    qrCodeUrl:
+      type: string
+    holdStartDate:
+      type: string
+      format: date-time
+    holdEndDate:
+      type: string
+      format: date-time
+    recruitStartDate:
+      type: string
+      format: date-time
+    recruitEndDate:
+      type: string
+      format: date-time
+    organizers:
+      type: array
+      items:
+        $ref: "#/components/schemas/User"
+    entries:
+      type: array
+      items:
+        $ref: "#/components/schemas/User"
+    categories:
+      type: array
+      items:
+        $ref: "#/components/schemas/Category"
+    group:
+      $ref: "#/components/schemas/Group"
+    venue:
+      $ref: "#/components/schemas/Venue"
+
+Venue:
+  type: object
+  required:
+    - name
+  properties:
+    id:
+      type: string
+    name:
+      type: string

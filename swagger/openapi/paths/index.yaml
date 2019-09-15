@@ -12,7 +12,7 @@
       - $ref: '#/components/parameters/PerPage'
     responses:
       200:
-        $ref: '#/components/responses/Events'
+        $ref: '#/components/responses/SearchEvents'
     security:
       - ApiKeyAuth: []
 /event:
@@ -23,10 +23,10 @@
     description: ''
     operationId: addEvent
     requestBody:
-      $ref: '#/components/requestBodies/Event'
+      $ref: '#/components/requestBodies/AddEvent'
     responses:
       201:
-        $ref: '#/components/responses/Event'
+        $ref: '#/components/responses/AddEvent'
     security:
       - ApiKeyAuth: []
 '/event/{eventId}':
@@ -70,41 +70,10 @@
           type: integer
           format: int64
     requestBody:
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              title:
-                description: Updated title of the event
-                type: string
-              description:
-                description: Updated description of the event
-                type: string
-              capacity:
-                description: Updated capacity of the event
-                type: integer
-              imageUrl:
-                type: string
-                description: イベントの画像
-              qrCodeUrl:
-                type: string
-                description: 投げ銭用のQRコード
-              holdStartDate:
-                type: string
-                format: date-time
-              holdEndDate:
-                type: string
-                format: date-time
-              recruitStartDate:
-                type: string
-                format: date-time
-              recruitEndDate:
-                type: string
-                format: date-time
+      $ref: '#/components/requestBodies/UpdateEvent'
     responses:
       200:
-        $ref: '#/components/responses/Event'
+        $ref: '#/components/responses/UpdateEvent'
     security:
       - ApiKeyAuth: []
 

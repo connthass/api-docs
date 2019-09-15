@@ -1,0 +1,85 @@
+
+AddEventRequestBody:
+  value:
+    title: 合同勉強会
+    description: エンジニア集まれ
+    capacity: 50
+    colorCode: "#f0f8ff"
+    imageUrl: "https://miro.medium.com/max/1200/1*aKVg84SP5oPV9fwOnbl6yQ.png"
+    qrCodeUrl: "https://www.asti.com/wp-content/uploads/2017/08/AAEAAQAAAAAAAAWbAAAAJGFlM2NhMWM3LTNjNDQtNDFlMy04MDUyLTAxMzJjZDJhMjcwNw.png"
+    holdStartDate: "2019-09-19T17:00:00Z"
+    holdEndDate: "2019-09-19T22:00:00Z"
+    recruitStartDate: "2019-08-30T12:00:00Z"
+    recruitEndDate: "2019-09-19T18:00:00Z"
+    group:
+      id: '1'
+      name: '開発部'
+    venue:
+      id: '1'
+      name: 'Villege'
+    entries:
+      - id: '1'
+        name: 'エントリーユーザ1'
+      - id: '2'
+        name: 'エントリーユーザ2'
+    organizers:
+      - id: '3'
+        name: '運営者1'
+    categories:
+      - id: '1'
+        name: 'PHP'
+
+EventResponse:
+  value:
+    id: '1'
+    title: 合同勉強会
+    description: エンジニア集まれ
+    capacity: 50
+    colorCode: "#f0f8ff"
+    imageUrl: "https://miro.medium.com/max/1200/1*aKVg84SP5oPV9fwOnbl6yQ.png"
+    qrCodeUrl: "https://www.asti.com/wp-content/uploads/2017/08/AAEAAQAAAAAAAAWbAAAAJGFlM2NhMWM3LTNjNDQtNDFlMy04MDUyLTAxMzJjZDJhMjcwNw.png"
+    holdStartDate: "2019-09-19T17:00:00Z"
+    holdEndDate: "2019-09-19T22:00:00Z"
+    recruitStartDate: "2019-08-30T12:00:00Z"
+    recruitEndDate: "2019-09-19T18:00:00Z"
+    group:
+      id: '1'
+      name: '開発部'
+    venue:
+      id: '1'
+      name: 'Villege'
+    entries:
+      - id: '1'
+        name: 'エントリーユーザ1'
+      - id: '2'
+        name: 'エントリーユーザ2'
+    organizers:
+      - id: '3'
+        name: '運営者1'
+    categories:
+      - id: '1'
+        name: 'PHP'
+
+Event2:
+  title: Goもくもく会
+  description: 個人のアプリをもくもく
+  capacity: 30
+  colorCode: "#f0f8ff"
+  imageUrl: "https://connpass-tokyo.s3.amazonaws.com/thumbs/ed/d0/edd04177b465552be344f722503f4de9.png"
+  qrCodeUrl: "https://www.asti.com/wp-content/uploads/2017/08/AAEAAQAAAAAAAAWbAAAAJGFlM2NhMWM3LTNjNDQtNDFlMy04MDUyLTAxMzJjZDJhMjcwNw.png"
+  holdStartDate: "2019-09-19T17:00:00Z"
+  holdEndDate: "2019-09-19T22:00:00Z"
+  recruitStartDate: "2019-08-30T12:00:00Z"
+  recruitEndDate: "2019-09-19T18:00:00Z"
+
+Event3:
+  title: React.js meetup
+  description: Reactでアプリケーションを作るとき、デザイナーさんとどのように一緒に進めていけばいいか悩んでいる人も多いのではないでしょうか？ 今回はデザインシステムをテーマにして、デザイナーの方々と一緒に考える会にしたいと思います。
+  capacity: 50
+  colorCode: "#f0f8ff"
+  imageUrl: "https://connpass-tokyo.s3.amazonaws.com/thumbs/45/6d/456d0e8836071ed0ea1f74a0d2207421.png"
+  qrCodeUrl: "https://www.asti.com/wp-content/uploads/2017/08/AAEAAQAAAAAAAAWbAAAAJGFlM2NhMWM3LTNjNDQtNDFlMy04MDUyLTAxMzJjZDJhMjcwNw.png"
+  holdStartDate: "2019-09-19T17:00:00Z"
+  holdEndDate: "2019-09-19T22:00:00Z"
+  recruitStartDate: "2019-08-30T12:00:00Z"
+  recruitEndDate: "2019-09-19T18:00:00Z"

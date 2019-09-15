@@ -1,0 +1,45 @@
+Entry:
+  description: 追加するためにはUserオブジェクトの配列が必要です
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: "#/components/schemas/Entry"
+AddEvent:
+  description: 追加するためにはEventオブジェクトが必要です
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: "#/components/schemas/Event"
+      examples:
+        AddEventExample:
+          $ref: "#/components/examples/AddEventRequestBody"
+UpdateEvent:
+  description: Eventオブジェクトから記事を更新します
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: "#/components/schemas/Event"
+Category:
+  description: 追加するためにはCategoryオブジェクトが必要です
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: "#/components/schemas/Category"
+User:
+  description: 追加するためにはUserオブジェクトが必要です
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: "#/components/schemas/User"
+Group:
+  description: 追加するためにはGroupオブジェクトが必要です
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: "#/components/schemas/Group"
