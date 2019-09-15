@@ -23,6 +23,11 @@ UpdateEvent:
     application/json:
       schema:
         $ref: "#/components/schemas/Event"
+      examples:
+        UpdateEventResponse:
+          $ref: "#/components/examples/UpdateEventResponse"
+        EntryEventResponse:
+          $ref: "#/components/examples/EntryEventResponse"
 
 SearchEvents:
   description: イベント検索後のイベントの一覧を返します
@@ -32,6 +37,10 @@ SearchEvents:
         type: array
         items:
           $ref: "#/components/schemas/Event"
+      examples:
+        EventsResponse:
+          $ref: "#/components/examples/EventsResponse"
+
 Category:
   description: 追加または更新されたCategoryオブジェクトを返します
   content:
@@ -44,32 +53,51 @@ User:
     application/json:
       schema:
         $ref: "#/components/schemas/User"
+      examples:
+        UserResponse:
+          $ref: "#/components/examples/UserResponse"
 Group:
   description: 追加または更新されたGroupオブジェクトを返します
   content:
     application/json:
       schema:
         $ref: "#/components/schemas/Group"
-Groups:
-  description: グループ検索後のグループの一覧を返します
+      examples:
+        GroupResponse:
+          $ref: "#/components/examples/GroupResponse"
+
+SearchGroups:
+  description: グループを検索してヒットしたグループの一覧を返します
   content:
     application/json:
       schema:
         type: array
         items:
           $ref: "#/components/schemas/Group"
-Entry:
-  description: 参加したUserオブジェクトの配列を返します
+      examples:
+        GroupsResponse:
+          $ref: "#/components/examples/GroupsResponse"
+
+SearchGroupEventsById:
+  description: グループ情報内のイベント一覧を返します
   content:
     application/json:
       schema:
-        type: object
-        properties:
-          entries:
-            type: array
-            items:
-              $ref: "#/components/schemas/User"
-          organizers:
-            type: array
-            items:
-              $ref: "#/components/schemas/User"
+        type: array
+        items:
+          $ref: "#/components/schemas/Event"
+      examples:
+        searchGroupEventsByIdResponse:
+          $ref: "#/components/examples/searchGroupEventsByIdResponse"
+
+SearchGroupMembersById:
+  description: グループ情報内のメンバ一覧を返します
+  content:
+    application/json:
+      schema:
+        type: array
+        items:
+          $ref: "#/components/schemas/Event"
+      examples:
+        searchGroupEventsByIdResponse:
+          $ref: "#/components/examples/UsersResponse"

@@ -21,7 +21,13 @@ UpdateEvent:
   content:
     application/json:
       schema:
-        $ref: "#/components/schemas/Event"
+        $ref: "#/components/schemas/UpdateEvent"
+      examples:
+        UpdateEventRequestBody:
+          $ref: "#/components/examples/UpdateEventRequestBody"
+        EntryEventRequestBody:
+          $ref: "#/components/examples/EntryEventRequestBody"
+
 Category:
   description: 追加するためにはCategoryオブジェクトが必要です
   required: true
@@ -43,3 +49,14 @@ Group:
     application/json:
       schema:
         $ref: "#/components/schemas/Group"
+
+CreateGroup:
+  description: 追加するにはGroupオブジェクトが必要です
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: "#/components/schemas/CreateGroupRequestBody"
+      examples:
+        EntryEventRequestBody:
+          $ref: "#/components/examples/CreateGroupRequestBody"
