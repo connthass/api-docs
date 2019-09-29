@@ -1,0 +1,704 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: Connthass API
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+externalDocs:
+  description: 'Connthass APIの概要'
+  url: 'https://github.com/connthass/api-docs/wiki/%E6%A6%82%E8%A6%81'
+tags:
+  - name: event
+    description: Operations about event
+  - name: category
+    description: Operations about category
+  - name: group
+    description: Operations about group
+  - name: user
+    description: Operations about user
+servers:
+  - url: http://127.0.0.1:8083
+  - url: https://127.0.0.1:8083
+paths:
+  /events:
+    get:
+      tags:
+        - event
+      summary: イベントを検索する
+      description: 記事の一覧を作成日時の降順で返します。
+      operationId: searchEvents
+      parameters:
+        - $ref: '#/components/parameters/Fields'
+        - $ref: '#/components/parameters/Query'
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PerPage'
+      responses:
+        200:
+          $ref: '#/components/responses/Events'
+      security:
+        - ApiKeyAuth: []
+  /event:
+    post:
+      tags:
+        - event
+      summary: イベントを追加する
+      description: ''
+      operationId: addEvent
+      requestBody:
+        $ref: '#/components/requestBodies/Event'
+      responses:
+        201:
+          $ref: '#/components/responses/Event'
+      security:
+        - ApiKeyAuth: []
+  '/event/{eventId}':
+    get:
+      tags:
+        - event
+      summary: IDからイベントを取得する
+      description: Returns a single Event
+      operationId: getEventById
+      parameters:
+        - name: eventId
+          in: path
+          description: ID of event to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: fields
+          in: query
+          description: 検索結果で取得するフィールドをカンマ区切りで指定
+          required: false
+          schema:
+            type: string
+      responses:
+        200:
+          $ref: '#/components/responses/Event'
+      security:
+        - ApiKeyAuth: []
+    patch:
+      tags:
+        - event
+      summary: 特定のイベントを更新する
+      description: ''
+      operationId: updateEvent
+      parameters:
+        - name: eventId
+          in: path
+          description: ID of event that needs to be updated
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  description: Updated title of the event
+                  type: string
+                description:
+                  description: Updated description of the event
+                  type: string
+                capacity:
+                  description: Updated capacity of the event
+                  type: integer
+                imageUrl:
+                  type: string
+                  description: イベントの画像
+                qrCodeUrl:
+                  type: string
+                  description: 投げ銭用のQRコード
+                holdStartDate:
+                  type: string
+                  format: date-time
+                holdEndDate:
+                  type: string
+                  format: date-time
+                recruitStartDate:
+                  type: string
+                  format: date-time
+                recruitEndDate:
+                  type: string
+                  format: date-time
+      responses:
+        200:
+          $ref: '#/components/responses/Event'
+      security:
+        - ApiKeyAuth: []
+
+    delete:
+      tags:
+        - event
+      summary: 特定のイベントを削除する
+      description: ''
+      operationId: deleteEvent
+      parameters:
+        - name: eventId
+          in: path
+          description: Event id to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        204:
+          description: No Content
+      security:
+        - ApiKeyAuth: []
+  /event/{eventId}/bookmark:
+    put:
+      tags:
+        - event
+      summary: イベントを「お気に入り」に追加する
+      description: bookmarks関連テーブルにレコードを追加します
+      operationId: addBookmark
+      parameters:
+        - name: eventId
+          in: path
+          description: name of user
+          required: true
+          schema:
+            type: string
+      responses:
+        204:
+          description: No Content
+      security:
+        - ApiKeyAuth: []
+  /event/{eventId}/entry:
+    post:
+      tags:
+        - event
+      summary: 参加者を追加する
+      description: entry_eventsの関連テーブルにレコードを追加する
+      operationId: entryEvent
+      parameters:
+        - name: eventId
+          in: path
+          description: ID of event that needs added
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        $ref: '#/components/requestBodies/Entry'
+      responses:
+        200:
+          $ref: '#/components/responses/Entry'
+      security:
+        - ApiKeyAuth: []
+  /category:
+    post:
+      tags:
+        - category
+      summary: カテゴリを作成する
+      description: This can only be done by the logged in user.
+      operationId: createCategory
+      requestBody:
+        $ref: '#/components/requestBodies/Category'
+      responses:
+        200:
+          $ref: '#/components/responses/Category'
+      security:
+        - ApiKeyAuth: []
+  /category/{categoryId}:
+    get:
+      tags:
+        - 'category'
+      summary: IDからカテゴリを取得
+      description: カテゴリを一つ返します
+      operationId: 'getCategoryById'
+      parameters:
+        - name: categoryId
+          in: path
+          description: 'ID of category to return'
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          $ref: '#/components/responses/Category'
+      security:
+        - ApiKeyAuth: []
+  /category/{categoryId}/like:
+    put:
+      tags:
+        - category
+      summary: カテゴリーに「いいね」する
+      description: likes関連テーブルにレコードを追加します
+      operationId: addLike
+      parameters:
+        - name: categoryId
+          in: path
+          description: name of user
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: No Content
+      security:
+        - ApiKeyAuth: []
+  /groups:
+    get:
+      tags:
+        - group
+      summary: グループを検索する
+      description: グループの一覧を作成日時の降順で返します。
+      operationId: searchGroups
+      parameters:
+        - $ref: '#/components/parameters/Fields'
+        - $ref: '#/components/parameters/Query'
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PerPage'
+      responses:
+        200:
+          $ref: '#/components/responses/Groups'
+      security:
+        - ApiKeyAuth: []
+  /group:
+    post:
+      tags:
+        - group
+      summary: グループを作成する
+      description: This can only be done by the logged in user.
+      operationId: createGroup
+      requestBody:
+        $ref: '#/components/requestBodies/Group'
+      responses:
+        200:
+          $ref: '#/components/responses/Group'
+      security:
+        - ApiKeyAuth: []
+  /group/{groupId}:
+    get:
+      tags:
+        - group
+      summary: グループ情報を取得する
+      description: 'Returns a single group'
+      operationId: 'getGroupById'
+      parameters:
+        - name: groupId
+          in: path
+          description: 'ID of group to return'
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          $ref: '#/components/responses/Group'
+      security:
+        - ApiKeyAuth: []
+  /group/{groupId}/events:
+    get:
+      tags:
+        - group
+      summary: グループ情報内イベント群を取得する
+      description: 'Returns a single group'
+      operationId: searchGroupEventsById
+      parameters:
+        - name: groupId
+          in: path
+          description: 'ID of group to return'
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          $ref: '#/components/responses/Events'
+      security:
+        - ApiKeyAuth: []
+  /group/{groupId}/member:
+    post:
+      tags:
+        - group
+      summary: メンバーを追加する
+      description: memberテーブルにレコードを追加する
+      operationId: joinGroup
+      parameters:
+        - name: groupId
+          in: path
+          description: ID of event that needs added
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        $ref: '#/components/requestBodies/User'
+      responses:
+        200:
+          $ref: '#/components/responses/User'
+      security:
+        - ApiKeyAuth: []
+  /group/{groupId}/member/{uid}:
+    delete:
+      tags:
+        - group
+      summary: メンバーを削除する
+      description: ''
+      operationId: deleteMember
+      parameters:
+        - name: groupId
+          in: path
+          description: member id to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: uid
+          in: path
+          description: ユーザID
+          required: true
+          schema:
+            type: string
+      responses:
+        204:
+          description: No Content
+      security:
+        - ApiKeyAuth: []
+  /user:
+    post:
+      tags:
+        - user
+      summary: ユーザを作成する
+      description: This can only be done by the logged in user.
+      operationId: createUser
+      requestBody:
+        $ref: '#/components/requestBodies/User'
+      responses:
+        200:
+          $ref: '#/components/responses/User'
+      security:
+        - ApiKeyAuth: []
+  /user/{uid}:
+    get:
+      tags:
+        - user
+      summary: ユーザ名から情報を取得
+      description: ''
+      operationId: getUserByUID
+      parameters:
+        - name: uid
+          in: path
+          description: 'The name that needs to be fetched. Use user1 for testing.'
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          $ref: '#/components/responses/User'
+      security:
+        - ApiKeyAuth: []
+    put:
+      tags:
+        - user
+      summary: ユーザ情報を更新
+      description: This can only be done by the logged in user.
+      operationId: updateUser
+      parameters:
+        - name: uid
+          in: path
+          description: The uid that need to be updated
+          required: true
+          schema:
+            type: string
+      requestBody:
+        $ref: '#/components/requestBodies/User'
+      responses:
+        204:
+          description: No content
+      security:
+        - ApiKeyAuth: []
+    delete:
+      tags:
+        - user
+      summary: ユーザを削除
+      description: This can only be done by the logged in user.
+      operationId: deleteUser
+      parameters:
+        - name: uid
+          in: path
+          description: The uid that needs to be deleted
+          required: true
+          schema:
+            type: string
+      responses:
+        204:
+          description: No Content
+      security:
+        - ApiKeyAuth: []
+  /user/{uid}/newEvents:
+    get:
+      tags:
+        - user
+      summary: 新着イベントを取得する
+      description: ''
+      operationId: getNewEvents
+      parameters:
+        - name: uid
+          in: path
+          description: uid of user
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          $ref: '#/components/responses/Events'
+      security:
+        - ApiKeyAuth: []
+components:
+  parameters:
+    Fields:
+      name: fields
+      in: query
+      description: 検索結果で取得するフィールドをカンマ区切りで指定
+      required: false
+      schema:
+        type: string
+    Query:
+      name: query
+      in: query
+      description: 検索クエリ
+      required: false
+      schema:
+        type: string
+    Page:
+      name: page
+      in: query
+      description: 'ページ番号 (1から100まで)'
+      required: false
+      schema:
+        type: integer
+        format: int64
+    PerPage:
+      name: perPage
+      in: query
+      description: '1ページあたりに含まれる要素数 (1から100まで)'
+      required: false
+      schema:
+        type: integer
+        format: int64
+  requestBodies:
+    Entry:
+      description: 追加するためにはUserオブジェクトの配列が必要です
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Entry'
+    Event:
+      description: 追加するためにはEventオブジェクトが必要です
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Event'
+    Category:
+      description: 追加するためにはCategoryオブジェクトが必要です
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Category'
+    User:
+      description: 追加するためにはUserオブジェクトが必要です
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/User'
+    Group:
+      description: 追加するためにはGroupオブジェクトが必要です
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Group'
+  responses:
+    Event:
+      description: 追加または更新されたEventオブジェクトを返します
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Event'
+    Events:
+      description: イベント検索後のイベントの一覧を返します
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/Event'
+    Category:
+      description: 追加または更新されたCategoryオブジェクトを返します
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Category'
+    User:
+      description: 追加または更新されたUserオブジェクトを返します
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/User'
+    Group:
+      description: 追加または更新されたGroupオブジェクトを返します
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Group'
+    Groups:
+      description: グループ検索後のグループの一覧を返します
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/Group'
+    Entry:
+      description: 参加したUserオブジェクトの配列を返します
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              entries:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+              organizers:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-KEY
+  schemas:
+    Entry:
+      type: object
+      properties:
+        entries:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+        organizers:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+    Group:
+      type: object
+      properties:
+        id:
+          type: string
+          example: '1'
+        name:
+          type: string
+          example: '開発部勉強会'
+        description:
+          type: string
+          example: '月一で勉強会をするよ'
+        domain:
+          type: string
+          example: 'dev-meeting'
+        colorCode:
+          type: string
+          example: '#6495ed'
+        imageUrl:
+          type: string
+          example: 'https://miro.medium.com/max/1200/1*aKVg84SP5oPV9fwOnbl6yQ.png'
+    Category:
+      type: object
+      properties:
+        id:
+          type: string
+          example: '1'
+        name:
+          type: string
+          example: 'Gophar'
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          example: '1'
+        name:
+          type: string
+          example: 'Hogehoge Taro'
+    Event:
+      type: object
+      required:
+        - title
+      properties:
+        id:
+          type: string
+          example: '1'
+        title:
+          type: string
+          example: 合同勉強会
+        description:
+          type: string
+          example: エンジニア集まれ
+        capacity:
+          type: integer
+          example: 50
+        colorCode:
+          type: string
+          example: '#f0f8ff'
+        imageUrl:
+          type: string
+          example: 'https://miro.medium.com/max/1200/1*aKVg84SP5oPV9fwOnbl6yQ.png'
+        qrCodeUrl:
+          type: string
+          example: 'https://miro.medium.com/max/1200/1*aKVg84SP5oPV9fwOnbl6yQ.png'
+        holdStartDate:
+          type: string
+          format: date-time
+          example: '2019/07/19 16:30:00'
+        holdEndDate:
+          type: string
+          format: date-time
+          example: '2019/07/19 19:00:00'
+        recruitStartDate:
+          type: string
+          format: date-time
+          example: '2019/07/01 24:00:00'
+        recruitEndDate:
+          type: string
+          format: date-time
+          example: '2019/07/16 24:00:00'
+        organizers:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+        entries:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+        categories:
+          type: array
+          items:
+            $ref: '#/components/schemas/Category'
+        group:
+          $ref: '#/components/schemas/Group'
+        venue:
+          $ref: '#/components/schemas/Venue'
+    Venue:
+      type: object
+      required:
+        - name
+      properties:
+        id:
+          type: string
+          example: '1'
+        name:
+          type: string
+          example: 'Village'
