@@ -1,0 +1,16 @@
+{
+  "name": "syuukai",
+  "version": "1.0.0",
+  "description": "",
+  "main": "fresh.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "multi-file-openapi --watch openapi/",
+    "resolve": "multi-file-openapi"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "multi-file-openapi": "^1.0.3"
+  }
+}
