@@ -1,0 +1,182 @@
+Group:
+  type: object
+  required:
+    - name
+    - description
+  properties:
+    id:
+      type: string
+    name:
+      type: string
+      minLength: 1
+      maxLength: 50
+    description:
+      type: string
+      maxLength: 20000
+    domain:
+      type: string
+      maxLength: 255
+    colorCode:
+      type: string
+      pattern: '^#[\d\w]{6}$'
+    imageUrl:
+      type: string
+      maxLength: 1024
+
+Category:
+  type: object
+  properties:
+    id:
+      type: string
+    name:
+      type: string
+      minLength: 1
+      maxLength: 50
+
+User:
+  type: object
+  properties:
+    id:
+      type: string
+    name:
+      type: string
+      minLength: 1
+      maxLength: 50
+
+Event:
+  type: object
+  required:
+    - title
+    - holdStartDate
+    - holdEndDate
+  properties:
+    id:
+      type: string
+    title:
+      type: string
+      minLength: 1
+      maxLength: 50
+    description:
+      type: string
+      maxLength: 20000
+    capacity:
+      type: integer
+      minimum: 0
+      maximum: 10000000
+    colorCode:
+      type: string
+      pattern: '^#[\d\w]{6}$'
+    imageUrl:
+      type: string
+      maxLength: 1024
+    qrCodeUrl:
+      type: string
+      maxLength: 1024
+    holdStartDate:
+      type: string
+      format: date-time
+    holdEndDate:
+      type: string
+      format: date-time
+    recruitStartDate:
+      type: string
+      format: date-time
+    recruitEndDate:
+      type: string
+      format: date-time
+    organizers:
+      type: array
+      items:
+        $ref: "#/components/schemas/User"
+      minItems: 1
+      maxItems: 100
+    entries:
+      type: array
+      items:
+        $ref: "#/components/schemas/User"
+      minItems: 0
+      maxItems: 100
+    categories:
+      type: array
+      items:
+        $ref: "#/components/schemas/Category"
+      minItems: 0
+      maxItems: 10
+    group:
+      $ref: "#/components/schemas/Group"
+    venue:
+      $ref: "#/components/schemas/Venue"
+
+UpdateEvent:
+  type: object
+  required:
+    - id
+  properties:
+    id:
+      type: string
+    title:
+      type: string
+      minLength: 1
+      maxLength: 50
+    description:
+      type: string
+      maxLength: 20000
+    capacity:
+      type: integer
+      minimum: 0
+      maximum: 10000000
+    colorCode:
+      type: string
+      pattern: '^#[\d\w]{6}$'
+    imageUrl:
+      type: string
+      maxLength: 1024
+    qrCodeUrl:
+      type: string
+      maxLength: 1024
+    holdStartDate:
+      type: string
+      format: date-time
+    holdEndDate:
+      type: string
+      format: date-time
+    recruitStartDate:
+      type: string
+      format: date-time
+    recruitEndDate:
+      type: string
+      format: date-time
+    organizers:
+      type: array
+      items:
+        $ref: "#/components/schemas/User"
+      minItems: 0
+      maxItems: 100
+    entries:
+      type: array
+      items:
+        $ref: "#/components/schemas/User"
+      minItems: 0
+      maxItems: 100
+    categories:
+      type: array
+      items:
+        $ref: "#/components/schemas/Category"
+      minItems: 0
+      maxItems: 10
+    group:
+      $ref: "#/components/schemas/Group"
+    venue:
+      $ref: "#/components/schemas/Venue"
+
+Venue:
+  type: object
+  required:
+    - name
+  properties:
+    id:
+      type: string
+    name:
+      type: string
+      minLength: 1
+      maxLength: 50

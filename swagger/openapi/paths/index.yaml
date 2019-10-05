@@ -12,7 +12,7 @@
       - $ref: '#/components/parameters/PerPage'
     responses:
       200:
-        $ref: '#/components/responses/Events'
+        $ref: '#/components/responses/SearchEvents'
     security:
       - ApiKeyAuth: []
 /event:
@@ -23,10 +23,10 @@
     description: ''
     operationId: addEvent
     requestBody:
-      $ref: '#/components/requestBodies/Event'
+      $ref: '#/components/requestBodies/AddEvent'
     responses:
       201:
-        $ref: '#/components/responses/Event'
+        $ref: '#/components/responses/AddEvent'
     security:
       - ApiKeyAuth: []
 '/event/{eventId}':
@@ -70,41 +70,10 @@
           type: integer
           format: int64
     requestBody:
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              title:
-                description: Updated title of the event
-                type: string
-              description:
-                description: Updated description of the event
-                type: string
-              capacity:
-                description: Updated capacity of the event
-                type: integer
-              imageUrl:
-                type: string
-                description: イベントの画像
-              qrCodeUrl:
-                type: string
-                description: 投げ銭用のQRコード
-              holdStartDate:
-                type: string
-                format: date-time
-              holdEndDate:
-                type: string
-                format: date-time
-              recruitStartDate:
-                type: string
-                format: date-time
-              recruitEndDate:
-                type: string
-                format: date-time
+      $ref: '#/components/requestBodies/UpdateEvent'
     responses:
       200:
-        $ref: '#/components/responses/Event'
+        $ref: '#/components/responses/UpdateEvent'
     security:
       - ApiKeyAuth: []
 
@@ -146,26 +115,22 @@
         description: No Content
     security:
       - ApiKeyAuth: []
-/event/{eventId}/entry:
-  post:
+  delete:
     tags:
       - event
-    summary: 参加者を追加する
-    description: entry_eventsの関連テーブルにレコードを追加する
-    operationId: entryEvent
+    summary: イベントの「お気に入り」を削除する
+    description: bookmarks関連テーブルからレコードを削除します
+    operationId: removeBookmark
     parameters:
       - name: eventId
         in: path
-        description: ID of event that needs added
+        description: name of user
         required: true
         schema:
-          type: integer
-          format: int64
-    requestBody:
-      $ref: '#/components/requestBodies/Entry'
+          type: string
     responses:
-      200:
-        $ref: '#/components/responses/Entry'
+      204:
+        description: No Content
     security:
       - ApiKeyAuth: []
 /category:
@@ -221,6 +186,24 @@
         description: No Content
     security:
       - ApiKeyAuth: []
+  delete:
+    tags:
+      - category
+    summary: カテゴリーの「いいね」を削除する
+    description: likes関連テーブルからレコードを削除する
+    operationId: removeLike
+    parameters:
+      - name: categoryId
+        in: path
+        description: name of user
+        required: true
+        schema:
+          type: string
+    responses:
+      '204':
+        description: No Content
+    security:
+      - ApiKeyAuth: []
 /groups:
   get:
     tags:
@@ -235,7 +218,7 @@
       - $ref: '#/components/parameters/PerPage'
     responses:
       200:
-        $ref: '#/components/responses/Groups'
+        $ref: '#/components/responses/SearchGroups'
     security:
       - ApiKeyAuth: []
 /group:
@@ -246,7 +229,7 @@
     description: This can only be done by the logged in user.
     operationId: createGroup
     requestBody:
-      $ref: '#/components/requestBodies/Group'
+      $ref: '#/components/requestBodies/CreateGroup'
     responses:
       200:
         $ref: '#/components/responses/Group'
@@ -289,42 +272,65 @@
           format: int64
     responses:
       200:
-        $ref: '#/components/responses/Events'
+        $ref: '#/components/responses/SearchGroupEventsById'
     security:
       - ApiKeyAuth: []
-/group/{groupId}/member:
-  post:
+/group/{groupId}/members:
+  get:
     tags:
       - group
-    summary: メンバーを追加する
-    description: memberテーブルにレコードを追加する
-    operationId: joinGroup
+    summary: グループ情報内メンバー群を取得する
+    description: 'Returns a members of the group'
+    operationId: searchGroupMembersById
     parameters:
       - name: groupId
         in: path
-        description: ID of event that needs added
+        description: 'ID of group to return'
         required: true
         schema:
           type: integer
           format: int64
-    requestBody:
-      $ref: '#/components/requestBodies/User'
     responses:
       200:
-        $ref: '#/components/responses/User'
+        $ref: '#/components/responses/SearchGroupMembersById'
     security:
       - ApiKeyAuth: []
-/group/{groupId}/member/{uid}:
+/group/{groupId}/member:
+  put:
+    tags:
+      - group
+    summary: メンバーに参加する
+    description: memberテーブルにレコードを追加する
+    operationId: addMember
+    parameters:
+      - name: groupId
+        in: path
+        description: ID of group that needs added
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: uid
+        in: path
+        description: ユーザID
+        required: true
+        schema:
+          type: string
+    responses:
+      204:
+        description: No Content
+    security:
+      - ApiKeyAuth: []
   delete:
     tags:
       - group
     summary: メンバーを削除する
-    description: ''
-    operationId: deleteMember
+    description: memberテーブルからレコードを削除する
+    operationId: removeMember
     parameters:
       - name: groupId
         in: path
-        description: member id to delete
+        description: member id to remove
         required: true
         schema:
           type: integer

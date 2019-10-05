@@ -1,0 +1,345 @@
+AddEventRequestBody:
+  value:
+    title: 合同勉強会
+    description: エンジニア集まれ
+    capacity: 50
+    colorCode: '#f0f8ff'
+    imageUrl: 'https://miro.medium.com/max/1200/1*aKVg84SP5oPV9fwOnbl6yQ.png'
+    qrCodeUrl: 'https://www.asti.com/wp-content/uploads/2017/08/AAEAAQAAAAAAAAWbAAAAJGFlM2NhMWM3LTNjNDQtNDFlMy04MDUyLTAxMzJjZDJhMjcwNw.png'
+    holdStartDate: '2019-09-19T17:00:00Z'
+    holdEndDate: '2019-09-19T22:00:00Z'
+    recruitStartDate: '2019-08-30T12:00:00Z'
+    recruitEndDate: '2019-09-19T18:00:00Z'
+    group:
+      id: '1'
+      name: 'グループ1'
+      description: 'サンプルグループです'
+      domain: 'sample-group'
+      colorCode: '#ffffff'
+      imageUrl: 'http://placehold.jp/24/cc9999/993333/150x150.png'
+    venue:
+      id: '1'
+      name: 'Villege'
+    entries:
+      - id: '1'
+        name: 'サンプルユーザ1'
+      - id: '2'
+        name: 'サンプルユーザ2'
+    organizers:
+      - id: '3'
+        name: '運営者1'
+    categories:
+      - id: '1'
+        name: 'PHP'
+
+EventResponse:
+  value:
+    id: '1'
+    title: 合同勉強会
+    description: エンジニア集まれ
+    capacity: 50
+    colorCode: '#f0f8ff'
+    imageUrl: 'https://miro.medium.com/max/1200/1*aKVg84SP5oPV9fwOnbl6yQ.png'
+    qrCodeUrl: 'https://www.asti.com/wp-content/uploads/2017/08/AAEAAQAAAAAAAAWbAAAAJGFlM2NhMWM3LTNjNDQtNDFlMy04MDUyLTAxMzJjZDJhMjcwNw.png'
+    holdStartDate: '2019-09-19T17:00:00Z'
+    holdEndDate: '2019-09-19T22:00:00Z'
+    recruitStartDate: '2019-08-30T12:00:00Z'
+    recruitEndDate: '2019-09-19T18:00:00Z'
+    group:
+      id: '1'
+      name: 'グループ1'
+      description: 'サンプルグループです'
+      domain: 'sample-group'
+      colorCode: '#ffffff'
+      imageUrl: 'http://placehold.jp/24/cc9999/993333/150x150.png'
+    venue:
+      id: '1'
+      name: 'Villege'
+    entries:
+      - id: '1'
+        name: 'サンプルユーザ1'
+      - id: '2'
+        name: 'サンプルユーザ2'
+    organizers:
+      - id: '3'
+        name: '運営者1'
+    categories:
+      - id: '1'
+        name: 'PHP'
+
+EventsResponse:
+  value:
+    - id: '1'
+      title: 合同勉強会
+      description: エンジニア集まれ
+      capacity: 50
+      colorCode: '#f0f8ff'
+      imageUrl: 'https://miro.medium.com/max/1200/1*aKVg84SP5oPV9fwOnbl6yQ.png'
+      qrCodeUrl: 'https://www.asti.com/wp-content/uploads/2017/08/AAEAAQAAAAAAAAWbAAAAJGFlM2NhMWM3LTNjNDQtNDFlMy04MDUyLTAxMzJjZDJhMjcwNw.png'
+      holdStartDate: '2019-09-19T17:00:00Z'
+      holdEndDate: '2019-09-19T22:00:00Z'
+      recruitStartDate: '2019-08-30T12:00:00Z'
+      recruitEndDate: '2019-09-19T18:00:00Z'
+      group:
+        id: '1'
+        name: 'グループ1'
+        description: 'サンプルグループです'
+        domain: 'sample-group'
+        colorCode: '#ffffff'
+        imageUrl: 'http://placehold.jp/24/cc9999/993333/150x150.png'
+      venue:
+        id: '1'
+        name: 'Villege'
+      entries:
+        - id: '1'
+          name: 'サンプルユーザ1'
+        - id: '2'
+          name: 'サンプルユーザ2'
+      organizers:
+        - id: '3'
+          name: '運営者1'
+      categories:
+        - id: '1'
+          name: 'PHP'
+    - id: '2'
+      title: Goもくもく会
+      description: 個人のアプリをもくもく
+      capacity: 30
+      colorCode: '#f0f8ff'
+      imageUrl: 'https://connpass-tokyo.s3.amazonaws.com/thumbs/ed/d0/edd04177b465552be344f722503f4de9.png'
+      qrCodeUrl: 'https://www.asti.com/wp-content/uploads/2017/08/AAEAAQAAAAAAAAWbAAAAJGFlM2NhMWM3LTNjNDQtNDFlMy04MDUyLTAxMzJjZDJhMjcwNw.png'
+      holdStartDate: '2019-09-19T17:00:00Z'
+      holdEndDate: '2019-09-19T22:00:00Z'
+      recruitStartDate: '2019-08-30T12:00:00Z'
+      recruitEndDate: '2019-09-19T18:00:00Z'
+      group:
+        id: '1'
+        name: 'グループ1'
+        description: 'サンプルグループです'
+        domain: 'sample-group'
+        colorCode: '#ffffff'
+        imageUrl: 'http://placehold.jp/24/cc9999/993333/150x150.png'
+      venue:
+        id: '1'
+        name: 'Villege'
+      entries:
+        - id: '1'
+          name: 'サンプルユーザ1'
+        - id: '2'
+          name: 'サンプルユーザ2'
+      organizers:
+        - id: '3'
+          name: '運営者1'
+      categories:
+        - id: '1'
+          name: 'PHP'
+    - id: '3'
+      title: React.js meetup
+      description: Reactでアプリケーションを作るとき、デザイナーさんとどのように一緒に進めていけばいいか悩んでいる人も多いのではないでしょうか？ 今回はデザインシステムをテーマにして、デザイナーの方々と一緒に考える会にしたいと思います。
+      capacity: 50
+      colorCode: '#f0f8ff'
+      imageUrl: 'https://connpass-tokyo.s3.amazonaws.com/thumbs/45/6d/456d0e8836071ed0ea1f74a0d2207421.png'
+      qrCodeUrl: 'https://www.asti.com/wp-content/uploads/2017/08/AAEAAQAAAAAAAAWbAAAAJGFlM2NhMWM3LTNjNDQtNDFlMy04MDUyLTAxMzJjZDJhMjcwNw.png'
+      holdStartDate: '2019-09-19T17:00:00Z'
+      holdEndDate: '2019-09-19T22:00:00Z'
+      recruitStartDate: '2019-08-30T12:00:00Z'
+      recruitEndDate: '2019-09-19T18:00:00Z'
+      group:
+        id: '1'
+        name: 'グループ1'
+        description: 'サンプルグループです'
+        domain: 'sample-group'
+        colorCode: '#ffffff'
+        imageUrl: 'http://placehold.jp/24/cc9999/993333/150x150.png'
+      venue:
+        id: '1'
+        name: 'Villege'
+      entries:
+        - id: '1'
+          name: 'サンプルユーザ1'
+        - id: '2'
+          name: 'サンプルユーザ2'
+      organizers:
+        - id: '3'
+          name: '運営者1'
+      categories:
+        - id: '1'
+          name: 'PHP'
+
+UpdateEventRequestBody:
+  value:
+    id: '1'
+    title: エンジニア大勉強会
+    description: 社内のエンジニアが大集合
+    capacity: 100
+    venue:
+      id: '10'
+      name: '大会議室'
+
+UpdateEventResponse:
+  value:
+    id: '1'
+    title: エンジニア大勉強会
+    description: 社内のエンジニアが大集合
+    capacity: 100
+    colorCode: '#f0f8ff'
+    imageUrl: 'https://miro.medium.com/max/1200/1*aKVg84SP5oPV9fwOnbl6yQ.png'
+    qrCodeUrl: 'https://www.asti.com/wp-content/uploads/2017/08/AAEAAQAAAAAAAAWbAAAAJGFlM2NhMWM3LTNjNDQtNDFlMy04MDUyLTAxMzJjZDJhMjcwNw.png'
+    holdStartDate: '2019-09-19T17:00:00Z'
+    holdEndDate: '2019-09-19T22:00:00Z'
+    recruitStartDate: '2019-08-30T12:00:00Z'
+    recruitEndDate: '2019-09-19T18:00:00Z'
+    group:
+      id: '1'
+      name: 'グループ1'
+      description: 'サンプルグループです'
+      domain: 'sample-group'
+      colorCode: '#ffffff'
+      imageUrl: 'http://placehold.jp/24/cc9999/993333/150x150.png'
+    venue:
+      id: '10'
+      name: '大会議室'
+    entries:
+      - id: '1'
+        name: 'サンプルユーザ1'
+      - id: '2'
+        name: 'サンプルユーザ2'
+    organizers:
+      - id: '3'
+        name: '運営者1'
+    categories:
+      - id: '1'
+        name: 'PHP'
+
+EntryEventRequestBody:
+  value:
+    id: '1'
+    entries:
+      - id: '4'
+        name: 'エントリーユーザ1'
+      - id: '5'
+        name: 'エントリーユーザ2'
+    organizers:
+      - id: '6'
+        name: '運営参加1'
+
+EntryEventResponse:
+  value:
+    id: '1'
+    title: 合同勉強会
+    description: エンジニア集まれ
+    capacity: 50
+    colorCode: '#f0f8ff'
+    imageUrl: 'https://miro.medium.com/max/1200/1*aKVg84SP5oPV9fwOnbl6yQ.png'
+    qrCodeUrl: 'https://www.asti.com/wp-content/uploads/2017/08/AAEAAQAAAAAAAAWbAAAAJGFlM2NhMWM3LTNjNDQtNDFlMy04MDUyLTAxMzJjZDJhMjcwNw.png'
+    holdStartDate: '2019-09-19T17:00:00Z'
+    holdEndDate: '2019-09-19T22:00:00Z'
+    recruitStartDate: '2019-08-30T12:00:00Z'
+    recruitEndDate: '2019-09-19T18:00:00Z'
+    group:
+      id: '1'
+      name: 'グループ1'
+      description: 'サンプルグループです'
+      domain: 'sample-group'
+      colorCode: '#ffffff'
+      imageUrl: 'http://placehold.jp/24/cc9999/993333/150x150.png'
+    venue:
+      id: '1'
+      name: 'Villege'
+    entries:
+      - id: '1'
+        name: 'サンプルユーザ1'
+      - id: '2'
+        name: 'サンプルユーザ2'
+      - id: '4'
+        name: 'エントリーユーザ1'
+      - id: '5'
+        name: 'エントリーユーザ2'
+    organizers:
+      - id: '3'
+        name: '運営者1'
+      - id: '6'
+        name: '運営参加1'
+    categories:
+      - id: '1'
+        name: 'PHP'
+
+CreateGroupRequestBody:
+  value:
+    name: 'グループ1'
+    description: 'サンプルグループです'
+    domain: 'sample-group'
+    colorCode: '#ffffff'
+    imageUrl: 'http://placehold.jp/24/cc9999/993333/150x150.png'
+
+GroupResponse:
+  value:
+    id: '1'
+    name: 'グループ1'
+    description: 'サンプルグループです'
+    domain: 'sample-group'
+    colorCode: '#ffffff'
+    imageUrl: 'http://placehold.jp/24/cc9999/993333/150x150.png'
+
+GroupsResponse:
+  value:
+    - id: '1'
+      name: 'グループ1'
+      description: 'サンプルグループ1です'
+      domain: 'sample-group1'
+      colorCode: '#49cc90'
+      imageUrl: 'http://placehold.jp/24/49cc90/ffffff/150x150.png'
+    - id: '2'
+      name: 'グループ2'
+      description: 'サンプルグループ2です'
+      domain: 'sample-group2'
+      colorCode: '#61affe'
+      imageUrl: 'http://placehold.jp/24/61affe/ffffff/150x150.png'
+    - id: '3'
+      name: 'グループ3'
+      description: 'サンプルグループ3です'
+      domain: 'sample-group3'
+      colorCode: '#fca130'
+      imageUrl: 'http://placehold.jp/24/fca130/ffffff/150x150.png'
+
+searchGroupEventsByIdResponse:
+  value:
+    - id: '1'
+      title: 合同勉強会
+      description: エンジニア集まれ
+      capacity: 50
+      colorCode: '#f0f8ff'
+      imageUrl: 'https://miro.medium.com/max/1200/1*aKVg84SP5oPV9fwOnbl6yQ.png'
+      qrCodeUrl: 'https://www.asti.com/wp-content/uploads/2017/08/AAEAAQAAAAAAAAWbAAAAJGFlM2NhMWM3LTNjNDQtNDFlMy04MDUyLTAxMzJjZDJhMjcwNw.png'
+      holdStartDate: '2019-09-19T17:00:00Z'
+      holdEndDate: '2019-09-19T22:00:00Z'
+      recruitStartDate: '2019-08-30T12:00:00Z'
+      recruitEndDate: '2019-09-19T18:00:00Z'
+      venue:
+        id: '1'
+        name: 'Villege'
+      entries:
+        - id: '1'
+          name: 'サンプルユーザ1'
+        - id: '2'
+          name: 'サンプルユーザ2'
+      organizers:
+        - id: '3'
+          name: '運営者1'
+      categories:
+        - id: '1'
+          name: 'PHP'
+
+UserResponse:
+  value:
+    id: '1'
+    name: 'ユーザ1'
+
+UsersResponse:
+  value:
+    - id: '1'
+      name: 'ユーザ1'
+    - id: '2'
+      name: 'ユーザ2'
+    - id: '3'
+      name: 'ユーザ3'
