@@ -54,8 +54,9 @@ EventEntry:
     application/json:
       schema:
         type: array
-        items:
-          type: string
+        properties:
+          items:
+            type: string
       examples:
         EventEntryRequestBody:
           $ref: "#/components/examples/EventEntryRequestBody"
@@ -67,8 +68,9 @@ EventJoin:
     application/json:
       schema:
         type: array
-        items:
-          type: string
+        properties:
+          items:
+            type: string
       examples:
         EventEntryRequestBody:
           $ref: "#/components/examples/EventJoinRequestBody"
