@@ -96,6 +96,124 @@
         description: No Content
     security:
       - ApiKeyAuth: []
+/event/{eventId}/entries:
+  get:
+    tags:
+      - event
+    summary: イベントの参加者を取得する
+    description: イベントの全参加者を返します
+    operationId: searchEventEntriesById
+    parameters:
+      - name: eventId
+        in: path
+        description: event identifier
+        required: true
+        schema:
+          type: integer
+          format: int64
+    responses:
+      200:
+        $ref: '#/components/responses/SearchEventEntriesById'
+    security:
+      - ApiKeyAuth: []
+/event/{eventId}/entry:
+  put:
+    tags:
+      - event
+    summary: イベントに参加する
+    description: イベントに参加します
+    operationId: entryEvent
+    parameters:
+      - name: eventId
+        in: path
+        description: event identifier
+        required: true
+        schema:
+          type: string
+    requestBody:
+      $ref: '#/components/requestBodies/EventEntry'
+    responses:
+      204:
+        description: No Content
+    security:
+      - ApiKeyAuth: []
+  delete:
+    tags:
+      - event
+    summary: イベント参加を取り消す
+    description: イベント参加権限を削除します
+    operationId: exitEvent
+    parameters:
+      - name: eventId
+        in: path
+        description: event identifier
+        required: true
+        schema:
+          type: string
+    responses:
+      204:
+        description: No Content
+    security:
+      - ApiKeyAuth: []
+/event/{eventId}/organizers:
+  get:
+    tags:
+      - event
+    summary: イベントの運営者を取得する
+    description: イベントの運営者を返します
+    operationId: searchEventOrganizersById
+    parameters:
+      - name: eventId
+        in: path
+        description: event identifier
+        required: true
+        schema:
+          type: integer
+          format: int64
+    responses:
+      200:
+        $ref: '#/components/responses/SearchEventOrganizersById'
+    security:
+      - ApiKeyAuth: []
+/event/{eventId}/join:
+  put:
+    tags:
+      - event
+    summary: イベントの運営に参加する
+    description: イベント運営に参加します
+    operationId: joinEvent
+    parameters:
+      - name: eventId
+        in: path
+        description: event identifier
+        required: true
+        schema:
+          type: string
+    requestBody:
+      $ref: '#/components/requestBodies/EventJoin'
+    responses:
+      204:
+        description: No Content
+    security:
+      - ApiKeyAuth: []
+  delete:
+    tags:
+      - event
+    summary: イベントの運営の参加を取り消す
+    description: イベント運営権限を削除します
+    operationId: leaveEvent
+    parameters:
+      - name: eventId
+        in: path
+        description: event identifier
+        required: true
+        schema:
+          type: string
+    responses:
+      204:
+        description: No Content
+    security:
+      - ApiKeyAuth: []
 /event/{eventId}/bookmark:
   put:
     tags:

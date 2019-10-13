@@ -10,27 +10,11 @@ AddEventRequestBody:
     holdEndDate: '2019-09-19T22:00:00Z'
     recruitStartDate: '2019-08-30T12:00:00Z'
     recruitEndDate: '2019-09-19T18:00:00Z'
-    group:
-      id: '1'
-      name: 'グループ1'
-      description: 'サンプルグループです'
-      domain: 'sample-group'
-      colorCode: '#ffffff'
-      imageUrl: 'http://placehold.jp/24/cc9999/993333/150x150.png'
-    venue:
-      id: '1'
-      name: 'Villege'
-    entries:
-      - id: '1'
-        name: 'サンプルユーザ1'
-      - id: '2'
-        name: 'サンプルユーザ2'
-    organizers:
-      - id: '3'
-        name: '運営者1'
+    groupId: '1'
+    venueId: '1'
     categories:
-      - id: '1'
-        name: 'PHP'
+      - 'PHP'
+      - 'Javascript'
 
 EventResponse:
   value:
@@ -55,17 +39,11 @@ EventResponse:
     venue:
       id: '1'
       name: 'Villege'
-    entries:
-      - id: '1'
-        name: 'サンプルユーザ1'
-      - id: '2'
-        name: 'サンプルユーザ2'
-    organizers:
-      - id: '3'
-        name: '運営者1'
     categories:
       - id: '1'
         name: 'PHP'
+      - id: '2'
+        name: 'Javascirpt'
 
 EventsResponse:
   value:
@@ -90,14 +68,6 @@ EventsResponse:
       venue:
         id: '1'
         name: 'Villege'
-      entries:
-        - id: '1'
-          name: 'サンプルユーザ1'
-        - id: '2'
-          name: 'サンプルユーザ2'
-      organizers:
-        - id: '3'
-          name: '運営者1'
       categories:
         - id: '1'
           name: 'PHP'
@@ -122,14 +92,6 @@ EventsResponse:
       venue:
         id: '1'
         name: 'Villege'
-      entries:
-        - id: '1'
-          name: 'サンプルユーザ1'
-        - id: '2'
-          name: 'サンプルユーザ2'
-      organizers:
-        - id: '3'
-          name: '運営者1'
       categories:
         - id: '1'
           name: 'PHP'
@@ -154,14 +116,6 @@ EventsResponse:
       venue:
         id: '1'
         name: 'Villege'
-      entries:
-        - id: '1'
-          name: 'サンプルユーザ1'
-        - id: '2'
-          name: 'サンプルユーザ2'
-      organizers:
-        - id: '3'
-          name: '運営者1'
       categories:
         - id: '1'
           name: 'PHP'
@@ -199,14 +153,6 @@ UpdateEventResponse:
     venue:
       id: '10'
       name: '大会議室'
-    entries:
-      - id: '1'
-        name: 'サンプルユーザ1'
-      - id: '2'
-        name: 'サンプルユーザ2'
-    organizers:
-      - id: '3'
-        name: '運営者1'
     categories:
       - id: '1'
         name: 'PHP'
@@ -246,20 +192,6 @@ EntryEventResponse:
     venue:
       id: '1'
       name: 'Villege'
-    entries:
-      - id: '1'
-        name: 'サンプルユーザ1'
-      - id: '2'
-        name: 'サンプルユーザ2'
-      - id: '4'
-        name: 'エントリーユーザ1'
-      - id: '5'
-        name: 'エントリーユーザ2'
-    organizers:
-      - id: '3'
-        name: '運営者1'
-      - id: '6'
-        name: '運営参加1'
     categories:
       - id: '1'
         name: 'PHP'
@@ -318,14 +250,6 @@ searchGroupEventsByIdResponse:
       venue:
         id: '1'
         name: 'Villege'
-      entries:
-        - id: '1'
-          name: 'サンプルユーザ1'
-        - id: '2'
-          name: 'サンプルユーザ2'
-      organizers:
-        - id: '3'
-          name: '運営者1'
       categories:
         - id: '1'
           name: 'PHP'
@@ -343,3 +267,33 @@ UsersResponse:
       name: 'ユーザ2'
     - id: '3'
       name: 'ユーザ3'
+
+SearchEventEntriesByIdResponse:
+  value:
+    - id: '1'
+      name: '参加ユーザ1'
+    - id: '2'
+      name: '参加ユーザ2'
+    - id: '3'
+      name: '参加ユーザ3'
+
+SearchEventOrganizersByIdResponse:
+  value:
+    - id: '1'
+      name: '運営ユーザ1'
+    - id: '2'
+      name: '運営ユーザ2'
+    - id: '3'
+      name: '運営ユーザ3'
+
+EventEntryRequestBody:
+  value:
+    - '1'
+    - '2'
+    - '3'
+
+EventJoinRequestBody:
+  value:
+    - '1'
+    - '2'
+    - '3'

@@ -101,3 +101,27 @@ SearchGroupMembersById:
       examples:
         searchGroupEventsByIdResponse:
           $ref: "#/components/examples/UsersResponse"
+
+SearchEventEntriesById:
+  description: イベント情報内の参加者一覧を返します
+  content:
+    application/json:
+      schema:
+        type: array
+        items:
+          $ref: "#/components/schemas/Event"
+      examples:
+        searchGroupEventsByIdResponse:
+          $ref: "#/components/examples/SearchEventEntriesByIdResponse"
+
+SearchEventOrganizersById:
+  description: イベント情報内の参加者一覧を返します
+  content:
+    application/json:
+      schema:
+        type: array
+        items:
+          $ref: "#/components/schemas/Event"
+      examples:
+        searchGroupEventsByIdResponse:
+          $ref: "#/components/examples/SearchEventOrganizersByIdResponse"

@@ -91,12 +91,6 @@ Event:
         $ref: "#/components/schemas/User"
       minItems: 1
       maxItems: 100
-    entries:
-      type: array
-      items:
-        $ref: "#/components/schemas/User"
-      minItems: 0
-      maxItems: 100
     categories:
       type: array
       items:
@@ -148,12 +142,6 @@ UpdateEvent:
       type: string
       format: date-time
     organizers:
-      type: array
-      items:
-        $ref: "#/components/schemas/User"
-      minItems: 0
-      maxItems: 100
-    entries:
       type: array
       items:
         $ref: "#/components/schemas/User"
