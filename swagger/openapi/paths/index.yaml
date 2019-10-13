@@ -551,6 +551,6 @@
           type: string
     responses:
       200:
-        $ref: '#/components/responses/Events'
+        $ref: '#/components/responses/UserNewEvents'
     security:
       - ApiKeyAuth: []

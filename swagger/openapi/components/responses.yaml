@@ -56,6 +56,19 @@ User:
       examples:
         UserResponse:
           $ref: "#/components/examples/UserResponse"
+
+UserNewEvents:
+  description: 新着イベント一覧を取得する
+  content:
+    application/json:
+      schema:
+        type: array
+        items:
+          $ref: "#/components/schemas/Event"
+      examples:
+        EventsResponse:
+          $ref: "#/components/examples/EventsResponse"
+
 Group:
   description: 追加または更新されたGroupオブジェクトを返します
   content:

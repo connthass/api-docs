@@ -53,8 +53,8 @@ EventEntry:
   content:
     application/json:
       schema:
-        type: array
-        properties:
+        peoperties:
+          type: array
           items:
             type: string
       examples:
@@ -67,8 +67,8 @@ EventJoin:
   content:
     application/json:
       schema:
-        type: array
-        properties:
+        peoperties:
+          type: array
           items:
             type: string
       examples:
