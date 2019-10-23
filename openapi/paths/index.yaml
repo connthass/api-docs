@@ -23,7 +23,7 @@
     description: ''
     operationId: createEvent
     requestBody:
-      $ref: '#/components/requestBodies/CreateEvent'
+      $ref: '#/components/requestBodies/Event'
     responses:
       201:
         $ref: '#/components/responses/CreateEvent'
@@ -351,7 +351,7 @@
     description: This can only be done by the logged in user.
     operationId: createGroup
     requestBody:
-      $ref: '#/components/requestBodies/CreateGroup'
+      $ref: '#/components/requestBodies/Group'
     responses:
       200:
         $ref: '#/components/responses/Group'

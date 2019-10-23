@@ -12,9 +12,9 @@ CreateEventRequestBody:
     recruitEndDate: '2019-09-19T18:00:00Z'
     groupId: '1'
     venueId: '1'
-    categories:
-      - 'PHP'
-      - 'Javascript'
+    categoryIds:
+      - '1'
+      - '2'
 
 EventResponse:
   value:
@@ -126,9 +126,7 @@ UpdateEventRequestBody:
     title: エンジニア大勉強会
     description: 社内のエンジニアが大集合
     capacity: 100
-    venue:
-      id: '10'
-      name: '大会議室'
+    venueId: '10'
 
 UpdateEventResponse:
   value:
@@ -156,18 +154,6 @@ UpdateEventResponse:
     categories:
       - id: '1'
         name: 'PHP'
-
-CreateEventEntryRequestBody:
-  value:
-    id: '1'
-    entries:
-      - id: '4'
-        name: 'エントリーユーザ1'
-      - id: '5'
-        name: 'エントリーユーザ2'
-    organizers:
-      - id: '6'
-        name: '運営参加1'
 
 CreateEventEntryResponse:
   value:
