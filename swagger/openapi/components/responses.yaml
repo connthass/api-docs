@@ -26,8 +26,8 @@ UpdateEvent:
       examples:
         UpdateEventResponse:
           $ref: "#/components/examples/UpdateEventResponse"
-        EntryEventResponse:
-          $ref: "#/components/examples/EntryEventResponse"
+        AddEventEntryResponse:
+          $ref: "#/components/examples/AddEventEntryResponse"
 
 SearchEvents:
   description: イベント検索後のイベントの一覧を返します

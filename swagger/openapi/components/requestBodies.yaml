@@ -18,8 +18,8 @@ UpdateEvent:
       examples:
         UpdateEventRequestBody:
           $ref: "#/components/examples/UpdateEventRequestBody"
-        EntryEventRequestBody:
-          $ref: "#/components/examples/EntryEventRequestBody"
+        AddEventEntryRequestBody:
+          $ref: "#/components/examples/AddEventEntryRequestBody"
 
 Category:
   description: 追加するためにはCategoryオブジェクトが必要です
@@ -44,7 +44,7 @@ CreateGroup:
       schema:
         $ref: "#/components/schemas/Group"
       examples:
-        EntryEventRequestBody:
+        AddEventEntryRequestBody:
           $ref: "#/components/examples/CreateGroupRequestBody"
 
 EventEntry:

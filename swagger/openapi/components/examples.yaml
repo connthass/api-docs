@@ -157,7 +157,7 @@ UpdateEventResponse:
       - id: '1'
         name: 'PHP'
 
-EntryEventRequestBody:
+AddEventEntryRequestBody:
   value:
     id: '1'
     entries:
@@ -169,7 +169,7 @@ EntryEventRequestBody:
       - id: '6'
         name: '運営参加1'
 
-EntryEventResponse:
+AddEventEntryResponse:
   value:
     id: '1'
     title: 合同勉強会
