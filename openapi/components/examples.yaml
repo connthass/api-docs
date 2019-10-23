@@ -1,4 +1,4 @@
-AddEventRequestBody:
+CreateEventRequestBody:
   value:
     title: 合同勉強会
     description: エンジニア集まれ
@@ -157,7 +157,7 @@ UpdateEventResponse:
       - id: '1'
         name: 'PHP'
 
-AddEventEntryRequestBody:
+CreateEventEntryRequestBody:
   value:
     id: '1'
     entries:
@@ -169,7 +169,7 @@ AddEventEntryRequestBody:
       - id: '6'
         name: '運営参加1'
 
-AddEventEntryResponse:
+CreateEventEntryResponse:
   value:
     id: '1'
     title: 合同勉強会

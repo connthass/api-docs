@@ -1,4 +1,4 @@
-AddEvent:
+CreateEvent:
   description: 追加するためにはEventオブジェクトが必要です
   required: true
   content:
@@ -6,8 +6,8 @@ AddEvent:
       schema:
         $ref: "#/components/schemas/Event"
       examples:
-        AddEventExample:
-          $ref: "#/components/examples/AddEventRequestBody"
+        CreateEventExample:
+          $ref: "#/components/examples/CreateEventRequestBody"
 UpdateEvent:
   description: Eventオブジェクトから記事を更新します
   required: true
@@ -18,8 +18,8 @@ UpdateEvent:
       examples:
         UpdateEventRequestBody:
           $ref: "#/components/examples/UpdateEventRequestBody"
-        AddEventEntryRequestBody:
-          $ref: "#/components/examples/AddEventEntryRequestBody"
+        CreateEventEntryRequestBody:
+          $ref: "#/components/examples/CreateEventEntryRequestBody"
 
 Category:
   description: 追加するためにはCategoryオブジェクトが必要です
@@ -44,7 +44,7 @@ CreateGroup:
       schema:
         $ref: "#/components/schemas/Group"
       examples:
-        AddEventEntryRequestBody:
+        CreateEventEntryRequestBody:
           $ref: "#/components/examples/CreateGroupRequestBody"
 
 EventEntry:

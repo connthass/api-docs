@@ -21,12 +21,12 @@
       - event
     summary: イベントを追加する
     description: ''
-    operationId: addEvent
+    operationId: createEvent
     requestBody:
-      $ref: '#/components/requestBodies/AddEvent'
+      $ref: '#/components/requestBodies/CreateEvent'
     responses:
       201:
-        $ref: '#/components/responses/AddEvent'
+        $ref: '#/components/responses/CreateEvent'
     security:
       - ApiKeyAuth: []
 '/event/{eventId}':
@@ -122,7 +122,7 @@
       - event
     summary: イベントに参加する
     description: イベントに参加します
-    operationId: addEventEntry
+    operationId: createEventEntry
     parameters:
       - name: eventId
         in: path
@@ -183,7 +183,7 @@
       - event
     summary: イベントの運営に参加する
     description: イベント運営に参加します
-    operationId: addEventOrganizer
+    operationId: createEventOrganizer
     parameters:
       - name: eventId
         in: path
@@ -224,7 +224,7 @@
       - event
     summary: イベントを「お気に入り」に追加する
     description: bookmarks関連テーブルにレコードを追加します
-    operationId: addBookmark
+    operationId: createBookmark
     parameters:
       - name: eventId
         in: path
@@ -242,7 +242,7 @@
       - event
     summary: イベントの「お気に入り」を削除する
     description: bookmarks関連テーブルからレコードを削除します
-    operationId: removeBookmark
+    operationId: deleteBookmark
     parameters:
       - name: eventId
         in: path
@@ -295,7 +295,7 @@
       - category
     summary: カテゴリーに「いいね」する
     description: likes関連テーブルにレコードを追加します
-    operationId: addLike
+    operationId: createLike
     parameters:
       - name: categoryId
         in: path
@@ -313,7 +313,7 @@
       - category
     summary: カテゴリーの「いいね」を削除する
     description: likes関連テーブルからレコードを削除する
-    operationId: removeLike
+    operationId: deleteLike
     parameters:
       - name: categoryId
         in: path
@@ -423,7 +423,7 @@
       - group
     summary: メンバーに参加する
     description: memberテーブルにレコードを追加する
-    operationId: addMember
+    operationId: createMember
     parameters:
       - name: groupId
         in: path
@@ -448,11 +448,11 @@
       - group
     summary: メンバーを削除する
     description: memberテーブルからレコードを削除する
-    operationId: removeMember
+    operationId: deleteMember
     parameters:
       - name: groupId
         in: path
-        description: member id to remove
+        description: member id to delete
         required: true
         schema:
           type: integer

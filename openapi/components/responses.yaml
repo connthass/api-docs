@@ -8,7 +8,7 @@ Event:
         EventResponse:
           $ref: "#/components/examples/EventResponse"
 
-AddEvent:
+CreateEvent:
   description: 追加されたEventオブジェクトを返します
   content:
     application/json:
@@ -26,8 +26,8 @@ UpdateEvent:
       examples:
         UpdateEventResponse:
           $ref: "#/components/examples/UpdateEventResponse"
-        AddEventEntryResponse:
-          $ref: "#/components/examples/AddEventEntryResponse"
+        CreateEventEntryResponse:
+          $ref: "#/components/examples/CreateEventEntryResponse"
 
 SearchEvents:
   description: イベント検索後のイベントの一覧を返します
