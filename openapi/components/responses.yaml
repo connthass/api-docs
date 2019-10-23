@@ -7,7 +7,14 @@ Event:
       examples:
         EventResponse:
           $ref: "#/components/examples/EventResponse"
-
+Events:
+  description: イベント検索後のイベントの一覧を返します
+  content:
+    application/json:
+      schema:
+        type: array
+        items:
+          $ref: "#/components/schemas/Event"
 CreateEvent:
   description: 追加されたEventオブジェクトを返します
   content:
