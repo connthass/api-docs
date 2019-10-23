@@ -142,7 +142,7 @@
       - event
     summary: イベント参加を取り消す
     description: イベント参加権限を削除します
-    operationId: exitEvent
+    operationId: deleteEventEntry
     parameters:
       - name: eventId
         in: path
