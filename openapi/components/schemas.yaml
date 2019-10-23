@@ -43,6 +43,20 @@ User:
       minLength: 1
       maxLength: 50
 
+EventEntry:
+  type: array
+  items:
+    type: string
+  minItems: 1
+  maxItems: 100
+
+EventOrganizer:
+  type: array
+  items:
+    type: string
+  minItems: 1
+  maxItems: 100
+
 Event:
   type: object
   required:
@@ -85,22 +99,16 @@ Event:
     recruitEndDate:
       type: string
       format: date-time
-    organizers:
+    categoryIds:
       type: array
       items:
         type: string
-      minItems: 1
-      maxItems: 100
-    categories:
-      type: array
-      items:
-        $ref: "#/components/schemas/Category"
       minItems: 0
       maxItems: 10
-    group:
-      $ref: "#/components/schemas/Group"
-    venue:
-      $ref: "#/components/schemas/Venue"
+    groupId:
+      type: string
+    venueId:
+      type: string
 
 UpdateEvent:
   type: object
@@ -141,37 +149,16 @@ UpdateEvent:
     recruitEndDate:
       type: string
       format: date-time
-    organizers:
+    categoryIds:
       type: array
       items:
-        $ref: "#/components/schemas/User"
-      minItems: 0
-      maxItems: 100
-    categories:
-      type: array
-      items:
-        $ref: "#/components/schemas/Category"
+        type: string
       minItems: 0
       maxItems: 10
-    group:
-      $ref: "#/components/schemas/Group"
-    venue:
-      $ref: "#/components/schemas/Venue"
-Entry:
-  description: 参加したUserオブジェクトの配列を返します
-  content:
-    application/json:
-      schema:
-        type: object
-        properties:
-          entries:
-            type: array
-            items:
-              $ref: "#/components/schemas/User"
-          organizers:
-            type: array
-            items:
-              $ref: "#/components/schemas/User"
+    groupId:
+      type: string
+    venueId:
+      type: strin
 Venue:
   type: object
   required:

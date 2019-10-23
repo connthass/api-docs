@@ -53,10 +53,7 @@ EventEntry:
   content:
     application/json:
       schema:
-        peoperties:
-          type: array
-          items:
-            type: string
+        $ref: "#/components/schemas/EventEntry"
       examples:
         EventEntryRequestBody:
           $ref: "#/components/examples/EventEntryRequestBody"
@@ -67,10 +64,7 @@ EventOrganizer:
   content:
     application/json:
       schema:
-        peoperties:
-          type: array
-          items:
-            type: string
+        $ref: "#/components/schemas/EventOrganizer"
       examples:
         EventEntryRequestBody:
           $ref: "#/components/examples/EventOrganizerRequestBody"

@@ -129,7 +129,7 @@ SearchEventEntriesById:
       schema:
         type: array
         items:
-          $ref: "#/components/schemas/Event"
+          $ref: "#/components/schemas/User"
       examples:
         searchGroupEventsByIdResponse:
           $ref: "#/components/examples/SearchEventEntriesByIdResponse"
@@ -141,7 +141,7 @@ SearchEventOrganizersById:
       schema:
         type: array
         items:
-          $ref: "#/components/schemas/Event"
+          $ref: "#/components/schemas/User"
       examples:
         searchGroupEventsByIdResponse:
           $ref: "#/components/examples/SearchEventOrganizersByIdResponse"
