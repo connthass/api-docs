@@ -48,7 +48,7 @@ CreateGroup:
           $ref: "#/components/examples/CreateGroupRequestBody"
 
 EventEntry:
-  description: 複数参加者を追加するにはUserId配列が必要です
+  description: 複数参加者を修正するにはUserId配列が必要です
   required: false
   content:
     application/json:
@@ -61,8 +61,8 @@ EventEntry:
         EventEntryRequestBody:
           $ref: "#/components/examples/EventEntryRequestBody"
 
-EventJoin:
-  description: 複数運営者を追加するにはUserId配列が必要です
+EventOrganizer:
+  description: 複数運営者を修正するにはUserId配列が必要です
   required: false
   content:
     application/json:
@@ -73,4 +73,4 @@ EventJoin:
             type: string
       examples:
         EventEntryRequestBody:
-          $ref: "#/components/examples/EventJoinRequestBody"
+          $ref: "#/components/examples/EventOrganizerRequestBody"

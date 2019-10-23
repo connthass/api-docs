@@ -292,7 +292,7 @@ EventEntryRequestBody:
     - '2'
     - '3'
 
-EventJoinRequestBody:
+EventOrganizerRequestBody:
   value:
     - '1'
     - '2'

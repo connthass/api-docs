@@ -88,7 +88,7 @@ Event:
     organizers:
       type: array
       items:
-        $ref: "#/components/schemas/User"
+        type: string
       minItems: 1
       maxItems: 100
     categories:

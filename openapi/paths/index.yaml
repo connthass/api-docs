@@ -150,6 +150,8 @@
         required: true
         schema:
           type: string
+    requestBody:
+      $ref: '#/components/requestBodies/EventEntry'
     responses:
       204:
         description: No Content
@@ -175,13 +177,13 @@
         $ref: '#/components/responses/SearchEventOrganizersById'
     security:
       - ApiKeyAuth: []
-/event/{eventId}/join:
+/event/{eventId}/organizer:
   put:
     tags:
       - event
     summary: イベントの運営に参加する
     description: イベント運営に参加します
-    operationId: joinEvent
+    operationId: addEventOrganizer
     parameters:
       - name: eventId
         in: path
@@ -190,7 +192,7 @@
         schema:
           type: string
     requestBody:
-      $ref: '#/components/requestBodies/EventJoin'
+      $ref: '#/components/requestBodies/EventOrganizer'
     responses:
       204:
         description: No Content
@@ -201,7 +203,7 @@
       - event
     summary: イベントの運営の参加を取り消す
     description: イベント運営権限を削除します
-    operationId: leaveEvent
+    operationId: deleteEventOrganizer
     parameters:
       - name: eventId
         in: path
@@ -209,6 +211,8 @@
         required: true
         schema:
           type: string
+    requestBody:
+      $ref: '#/components/requestBodies/EventEntry'
     responses:
       204:
         description: No Content
@@ -271,7 +275,7 @@
       - 'category'
     summary: IDからカテゴリを取得
     description: カテゴリを一つ返します
-    operationId: 'getCategoryById'
+    operationId: getCategoryById
     parameters:
       - name: categoryId
         in: path
