@@ -158,7 +158,7 @@ UpdateEvent:
     groupId:
       type: string
     venueId:
-      type: strin
+      type: string
 Venue:
   type: object
   required:
