@@ -4,7 +4,6 @@ DockerでモックサーバとSwagger UIを立ち上げることができます
 
 # 起動方法
 ```
-> cd swagger
 > npm run resolve   # 初回起動時のみ必要
 > docker-compose up -d
 > docker-compose ps
@@ -13,7 +12,6 @@ NAMES               PORTS                            COMMAND                  NE
 swagger-nginx       80/tcp, 0.0.0.0:8084->8084/tcp   "nginx -g 'daemon of…"   swagger_link
 swagger-api         0.0.0.0:8083->8000/tcp           "/usr/local/bin/apis…"   swagger_link
 swagger-ui          80/tcp, 0.0.0.0:8082->8080/tcp   "sh /usr/share/nginx…"   api-docs_default
-swagger                                              "docker-entrypoint.s…"   api-docs_default
 ```
 
 # API概要
